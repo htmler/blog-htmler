@@ -96,7 +96,7 @@ export default {
   }
   .container-img {
     margin-top: 80px;
-    height: 500px;
+    height: 350px;
     background: url(../../assets/bg-column.jpg) no-repeat;
     background-size: 100%;
     position: relative;

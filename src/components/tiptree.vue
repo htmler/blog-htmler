@@ -6,11 +6,14 @@
   <div class="container-body">
     <ul class="body-list">
       <li v-for="item in navList">
-        <div class="li-squar"></div>
+        <div class="li-squar">
+        </div>
         <div class="li-content">{{item.name}}</div>
       </li>
     </ul>
-    <div class="body-img"></div>
+    <div class="body-img">
+      <img src="../assets/banner-2.jpg" alt="">
+    </div>
   </div>
 </div>
 </template>
@@ -98,6 +101,11 @@ export default {
       background-color: #000;
       border-radius: 5px;
       transform: translateX(-15px);
+      height: 150px;
+      img{
+            width: 100%;
+            height: 100%;
+          }
     }
   }
 }

@@ -39,6 +39,7 @@ export default {
     width: 100%;
     height: 100%;
     padding: 20px 15px;
+    border-radius: 3px;
     box-sizing: border-box;
     color: #d0d2d4;
     background-color: rgb(42, 42, 42);
