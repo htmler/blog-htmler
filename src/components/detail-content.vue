@@ -4,6 +4,8 @@
             <ul class="logo-list">
                 <li>精选</li>
                 <li>原创</li>
+                <li>故事</li>
+                <li>情感</li>
             </ul>
             <div class="logo-author">
                 <img src="../assets/d_avatar.png" alt="">
@@ -48,6 +50,13 @@ Miyki 在澳洲上学，经常瞒着父母到世界各地撒野，有时候还�
 
 Miyki 将一头短发染成白色，身上穿着背心和热裤，脚踩着夹脚凉鞋。她的背心正面印着梦幻杰基，就是一道红蓝闪电劈开大卫·鲍伊整张脸的那个造型。闪电上端一直蔓延到背心隆起的边缘。她的肤色很白，上下半身的比例堪称完美，脚趾涂了蓝色指甲油，凉鞋夹带上镶嵌两颗黑色的宝石。
         </div>
+        <div class="container-end">
+            <div class="end-name">THE END</div>
+            <div class="end-info">
+                版权声明：本文来自 <span class="info-from"> 豆瓣 </span> , 相关版权归原作者及来源网站所有。
+            </div>
+            <div class="end-link">查看全文</div>
+        </div>
     </div>
 </template>
 
@@ -76,8 +85,11 @@ export default {
         .logo-list{
             display: flex;
             li{
-                width: 40px;
+                width: 50px;
                 height: 20px;
+                line-height: 20px;
+                text-align: center;
+                font-size: 14px;
                 background-color: #efefef;
                 margin-right: 15px;
                 &:nth-last-of-type(1){
@@ -98,6 +110,30 @@ export default {
     }
     .container-content{
         margin-top: 30px;
+    }
+    .container-end{
+        margin-top: 50px;
+        text-align: center;
+        .end-name{
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .end-info{
+            font-size: 14px;
+            color: #999;
+            margin-top: 20px;
+            .info-from{
+                color: blue;
+                cursor: pointer;
+            }
+        }
+        .end-link{
+            margin-top: 20px;
+            color: blue;
+            cursor: pointer;
+            font-size: 14px;
+        }
     }
 }
 </style>

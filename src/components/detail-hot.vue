@@ -4,7 +4,7 @@
             <div class="title-txt">热门</div>
         </div>
         <div class="container-list">
-            <div class="list-body">
+            <div class="list-body" v-for="item of hotList">
                 <singlecolumnc></singlecolumnc>
             </div>
         </div>
@@ -17,7 +17,12 @@ export default {
   name: "detail-hot",
   components:{Singlecolumnc},
   data() {
-    return {};
+    return {
+        hotList:[
+            {name:'xxx',id:1},
+            {name:'xxxx',id:2}
+        ]
+    };
   }
 };
 </script>
@@ -44,6 +49,9 @@ export default {
   }
   .container-list{
       margin-top: 20px;
+      .list-body{
+          margin-bottom: 10px;
+      }
   }
 }
 </style>

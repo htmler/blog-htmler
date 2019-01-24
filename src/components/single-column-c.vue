@@ -1,7 +1,7 @@
 <template>
     <div class="single-colunm-c">
         <div class="column-title">冷幻觉</div>
-        <div class="container-content">
+        <div class="column-content">
             对于爱旅游的人来说，要是听到有人创办了旅游杂志，可能会以为这人肯定是个...
         </div>
     </div>
@@ -18,45 +18,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.detail-hot-container {
+.single-colunm-c {
   width: 100%;
   height: 100%;
-  cursor: pointer;
-  &:hover {
-    .container-title {
-      color: #04ac71;
-    }
+  font-size: 14px;
+  .column-title {
+      color: #000;
+      font-weight: bold;
   }
-  .container-title {
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-  .container-img {
-    width: 100%;
-    height: 140px;
-    overflow: hidden;
-    background-color: gray;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    img {
-      transition: all 0.5s;
-      width: 100%;
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-  }
-  .container-bottom {
-    box-sizing: border-box;
-    padding: 5px;
-    .bottom-summary {
-      margin-bottom: 15px;
-      font-size: 14px;
-    }
-    .bottom-more {
-      color: #04ac71;
-      font-size: 14px;
-    }
+  .column-content{
+      padding: 10px 0;
+      box-sizing: border-box;
+      border-bottom: 1px dotted #efefef;
+      color: #999;
   }
 }
 </style>
