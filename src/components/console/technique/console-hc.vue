@@ -9,7 +9,12 @@
         </el-table-column>
         <el-table-column prop="content" label="简介" width = "660">
         </el-table-column>
-        <el-table-column prop="handle" label="操作">
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <router-link to = "/console/edit">
+        <el-button type="text" size="small">编辑</el-button>
+                </router-link>
+      </template>
         </el-table-column>
       </el-table>
     </div>
@@ -23,11 +28,11 @@ export default {
       date: "2016-05-02",
       title: "如何写好一篇文章",
       author: "张三",
-      content: "要想写好一篇文章，要想写好一篇文章，要想写好一篇文章要想写好一篇文章",
-      handle: '编辑'
+      content:
+        "要想写好一篇文章，要想写好一篇文章，要想写好一篇文章要想写好一篇文章"
     };
     return {
-        tableData: Array(6).fill(item)
+      tableData: Array(6).fill(item)
     };
   }
 };

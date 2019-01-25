@@ -22,6 +22,7 @@ import Amusementvideo from '@/components/console/amusement/console-video'
 import Continentconsole from '@/components/console/continent/console-continent'
 import Discoveryconsole from '@/components/console/discovery/console-discovery'
 import Resourceconsole from '@/components/console/resource/console-resource'
+import Edit from '@/components/console/edit/console-edit'
 Vue.use(Router)
 
 export default new Router({
@@ -135,6 +136,11 @@ export default new Router({
           name: 'discovery',
           component: Discoveryconsole
         },
+        {
+          path: 'edit',
+          name: 'edit',
+          component: Edit
+        }
       ]
     },
     {
