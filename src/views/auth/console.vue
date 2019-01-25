@@ -74,7 +74,9 @@
   
   <el-container>
     <el-header style="text-align: left; font-size: 20px;background-color: #333;color:#999">
-        陈前
+       <router-link to = "/home">
+          <span>陈前</span>
+          </router-link>
     </el-header>
     
     <el-main>
