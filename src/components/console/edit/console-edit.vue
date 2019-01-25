@@ -2,8 +2,11 @@
     <div class="column-container">
         <div class="container-form">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="文章名称" prop="name">
-                    <el-input v-model="ruleForm.name"></el-input>
+                <el-form-item label="文章名称" prop="title">
+                    <el-input v-model="ruleForm.title"></el-input>
+                </el-form-item>
+                <el-form-item label="文章作者" prop="author">
+                    <el-input v-model="ruleForm.author"></el-input>
                 </el-form-item>
                 <el-form-item label="上传时间" required>
                     <el-col :span="11">
@@ -50,7 +53,8 @@ export default {
   data() {
     return {
       ruleForm: {
-        name: "",
+        title: "",
+        author:"",
         date1: "",
         delivery: false,
         type: [],
@@ -58,8 +62,12 @@ export default {
         content: ""
       },
       rules: {
-        name: [
+        title: [
           { required: true, message: "请输入文章名称", trigger: "blur" },
+          { min: 0, max: 20, message: "长度在20个字符以内", trigger: "blur" }
+        ],
+        author: [
+          { required: true, message: "请输入文章作者", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
         ],
         date1: [
