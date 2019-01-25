@@ -10,10 +10,10 @@
             <span>陈前</span>
         </div>
         <div class="box-list">
-            <div class="list-name">网名：换种措辞</div>
-            <div class="list-occup">职业：前端开发工程师</div>
-            <div class="list-home">现居：北京-大兴区</div>
-            <div class="list-Email">Email：hjrfhd@qq.com</div>
+            <div class="list-name list-li">网名：换种措辞</div>
+            <div class="list-occup list-li">职业：前端开发工程师</div>
+            <div class="list-home list-li">现居：北京-大兴区</div>
+            <div class="list-Email list-li">Email：hjrfhd@qq.com</div>
         </div>
         <div class="box-icon">
             <div class="icon-home icon-show">home</div>
@@ -69,17 +69,23 @@ export default {
         text-align: center;
     }
     .box-list{
-        margin-top: 20px;
-        font-size: 14px;
+        margin-top: 15px;
+        font-size: 12px;
+        .list-li{
+            padding-bottom: 5px;
+        }
     }
     .box-icon{
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
+        font-size: 12px;
         .icon-show{
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
             box-shadow: 0 1px 0 rgba($color: #fff, $alpha: 0.1),inset 0 1px 1px rgba($color: #000000, $alpha: 0.7)
         }
     }

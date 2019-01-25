@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { setInterval, clearInterval } from 'timers';
 export default {
   name: "home-banner",
   data() {
@@ -74,7 +73,6 @@ export default {
   .banner-left {
     width: 80%;
     height: 100%;
-    background-color: orange;
     border-radius: 5px;
     cursor: pointer;
     img{

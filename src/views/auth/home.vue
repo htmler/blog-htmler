@@ -10,6 +10,7 @@
         <li v-for="item in array"><router-link :to = "item.link">{{item.name}}</router-link></li>
       </ul>
     </div>
+    <div class="header-console"><router-link to = "/console">后台管理</router-link></div>
     </div>
   </div>
 <router-view/>
@@ -59,6 +60,7 @@ export default {
       box-sizing: border-box;
       width: 1200px;
       margin: 0 auto;
+      position: relative;
       .header-left {
       font-size: 32px;
     }
@@ -80,6 +82,24 @@ export default {
             color: #fff;
           }
         }
+      }
+    }
+    .header-console{
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: #999;
+      border: 1px solid #999;
+      width: 100px;
+      height: 40px;
+      box-sizing: border-box;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      &:hover{
+        color: #fff;
       }
     }
     }
