@@ -10,7 +10,7 @@
         <li v-for="item in array"><router-link :to = "item.link">{{item.name}}</router-link></li>
       </ul>
     </div>
-    <div class="header-console"><router-link to = "/console">后台管理</router-link></div>
+    <div class="header-console"><router-link to = "/console" target = "_blank">后台管理</router-link></div>
     </div>
   </div>
 <router-view/>

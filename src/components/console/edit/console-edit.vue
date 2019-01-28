@@ -33,7 +33,7 @@
             </el-form-item>
             <el-form-item label="内容" prop="content">
                 <!-- <el-input type="textarea" v-model="ruleForm.content"></el-input> -->
-                <mavonEditor v-model="content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <mavonEditor v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
             </el-form-item>
             <el-form-item> 
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -96,7 +96,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+           console.log(this.$store.state.fileList.show);
         } else {
           console.log("error submit!!");
           return false;
