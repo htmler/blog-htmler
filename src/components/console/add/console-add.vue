@@ -101,7 +101,7 @@ export default {
         if (valid) {
            this.$server.PushFileList(this.ruleForm).then(
              obj =>{
-               console.log(obj);
+               this.$router.push({path:`/console/${this.$route.params.type}`})
              }
            )
         } else {
