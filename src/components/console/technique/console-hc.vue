@@ -16,9 +16,7 @@
         </el-table-column>
         <el-table-column label="操作">
             <template slot-scope="scope">
-                <router-link to = "/console/edit">
-        <el-button type="text" size="small">编辑</el-button>
-                </router-link>
+        <el-button type="text" size="small" @click="edit">编辑</el-button>
       </template>
         </el-table-column>
       </el-table>
@@ -34,6 +32,11 @@ export default {
 
       ],
     };
+  },
+  methods:{
+    edit(){
+      this.$router.push({path:`/console/edit/${this.tableData.title}`});
+    }
   },
   created() {
     this.ruleForm = {
