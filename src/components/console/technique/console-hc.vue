@@ -3,7 +3,7 @@
         <el-table :data="tableData">
         <el-table-column prop="title" label="标题" width="140">
         </el-table-column>
-        <el-table-column prop="date" label="时间" width="120">
+        <el-table-column prop="date1" label="时间" width="120">
         </el-table-column>
         <el-table-column prop="author" label="作者" width = "120">
         </el-table-column>
@@ -24,16 +24,14 @@
 export default {
   name: "console-hc",
   data() {
-    const item = {
-      date: "2016-05-02",
-      title: "如何写好一篇文章",
-      author: "张三",
-      content:
-        "要想写好一篇文章，要想写好一篇文章，要想写好一篇文章要想写好一篇文章"
-    };
     return {
-      tableData: Array(6).fill(item)
+      tableData:[],
     };
+  },
+  created() {
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.tableData = obj;
+    });
   }
 };
 </script>

@@ -96,7 +96,11 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-           console.log(this.$store.state.fileList.show);
+           this.$server.PushFileList(this.ruleForm).then(
+             obj =>{
+               console.log(obj);
+             }
+           )
         } else {
           console.log("error submit!!");
           return false;

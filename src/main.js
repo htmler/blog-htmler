@@ -6,8 +6,10 @@ import router from './router'
 import ElementUI from 'element-ui'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
+import {server} from './providers/http-servide'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.prototype.$server=server;
 
 /* eslint-disable no-new */
 new Vue({
