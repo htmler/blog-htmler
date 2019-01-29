@@ -78,7 +78,6 @@
           <span>陈前</span>
           </router-link>
     </el-header>
-    
     <el-main>
        <router-view/>
     </el-main>

@@ -1,5 +1,10 @@
 <template>
     <div class="column-container">
+      <el-header style="text-align: right; font-size: 20px;background-color: #fff;color:#999">
+        <router-link to = "/console/add/discovery">
+      <el-button>新增</el-button>
+      </router-link>
+    </el-header>
         <el-table :data="tableData">
         <el-table-column prop="title" label="标题" width="140">
         </el-table-column>
@@ -24,15 +29,18 @@
 export default {
   name: "console-discovery",
   data() {
-    const item = {
-      date: "2016-05-02",
-      title: "如何写好一篇文章",
-      author: "张三",
-      content: "要想写好一篇文章，要想写好一篇文章，要想写好一篇文章要想写好一篇文章",
-    };
     return {
-        tableData: Array(6).fill(item)
+      tableData: []
     };
+  },
+  created(){
+      this.ruleForm = {
+      ...this.ruleForm,
+      tag:'discovery'
+    }
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.tableData = obj;
+    });
   }
 };
 </script>

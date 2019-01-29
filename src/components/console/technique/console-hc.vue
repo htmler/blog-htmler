@@ -1,9 +1,14 @@
 <template>
     <div class="column-container">
+      <el-header style="text-align: right; font-size: 20px;background-color: #fff;color:#999">
+        <router-link to = "/console/add/hc">
+      <el-button>新增</el-button>
+      </router-link>
+    </el-header>
         <el-table :data="tableData">
         <el-table-column prop="title" label="标题" width="140">
         </el-table-column>
-        <el-table-column prop="date1" label="时间" width="120">
+        <el-table-column prop="dat" label="时间" width="120">
         </el-table-column>
         <el-table-column prop="author" label="作者" width = "120">
         </el-table-column>
@@ -25,10 +30,16 @@ export default {
   name: "console-hc",
   data() {
     return {
-      tableData:[],
+      tableData:[
+
+      ],
     };
   },
   created() {
+    this.ruleForm = {
+      ...this.ruleForm,
+      tag:'hc'
+    }
     this.$server.getFileList(this.ruleForm).then(obj => {
       this.tableData = obj;
     });

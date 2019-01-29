@@ -23,6 +23,7 @@ import Continentconsole from '@/components/console/continent/console-continent'
 import Discoveryconsole from '@/components/console/discovery/console-discovery'
 import Resourceconsole from '@/components/console/resource/console-resource'
 import Edit from '@/components/console/edit/console-edit'
+import Add from '@/components/console/add/console-add'
 Vue.use(Router)
 
 export default new Router({
@@ -140,6 +141,11 @@ export default new Router({
           path: 'edit',
           name: 'edit',
           component: Edit
+        },
+        {
+          path: 'add/:type',
+          name: 'add',
+          component: Add
         }
       ]
     },

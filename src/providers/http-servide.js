@@ -160,7 +160,6 @@ export const server = {
         return fetch('/api/fileList',paramObj);
     },
     PushFileList(paramObj){
-        console.log(paramObj)
         return post('/api/fileSave',paramObj);
     }
 }
