@@ -8,10 +8,21 @@
                 <el-form-item label="文章作者" prop="author">
                     <el-input v-model="ruleForm.author"></el-input>
                 </el-form-item>
+                <el-form-item label="文章背景图" prop="imageUrl">
+                    <el-upload
+                      class="bg-uploader"
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      :before-upload="beforeAvatarUpload">
+                      <img v-if="ruleForm.imageUrl" :src="ruleForm.imageUrl" class="avatar">
+                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
                 <el-form-item label="上传时间" required>
                     <el-col :span="11">
                     <el-form-item prop="date1">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" format="yyyy 年 MM 月 dd 日" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
                     </el-form-item>
                     </el-col>
                     <el-col :span="11">
@@ -36,7 +47,7 @@
                 <mavonEditor v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
             </el-form-item>
             <el-form-item> 
-                <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+                <el-button type="primary" @click="submitForm('ruleForm')">立即修改</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
         </el-form>
@@ -54,7 +65,7 @@ export default {
     return {
       ruleForm: {
         title: "",
-        author:"",
+        author: "",
         date1: "",
         delivery: false,
         type: [],
@@ -72,7 +83,7 @@ export default {
         ],
         date1: [
           {
-            type: "date",
+            type: "string",
             required: true,
             message: "请选择日期",
             trigger: "change"
@@ -91,16 +102,30 @@ export default {
     };
   },
   methods: {
+     handleAvatarSuccess(res, file) {
+        this.ruleForm.imageUrl = URL.createObjectURL(file.raw);
+        console.log(this.ruleForm.imageUrl)
+    },
+    beforeAvatarUpload(file) { 
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传背景图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+    },
     changeMavon() {},
     $imgAdd() {},
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-           this.$server.PushFileList(this.ruleForm).then(
-             obj =>{
-               console.log(obj);
-             }
-           )
+          this.$server.updateFile(this.ruleForm).then(obj => {
+            this.$router.push({path:`/console/${this.ruleForm.tag}`});
+          });
         } else {
           console.log("error submit!!");
           return false;
@@ -110,15 +135,45 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     }
+  },
+  created() {
+    this.$server.editFile(this.$route.params).then(obj => {
+      this.ruleForm = {
+        ...this.ruleForm,
+        ...obj,
+      }
+    });
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.column-container{
-    width: 800px;
-    margin: 0 auto;
+.column-container {
+  width: 800px;
+  margin: 0 auto;
 }
+.bg-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 300px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .avatar {
+    height: 178px;
+    display: block;
+  }
 </style>
 

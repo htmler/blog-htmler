@@ -138,7 +138,7 @@ export default new Router({
           component: Discoveryconsole
         },
         {
-          path: 'edit/:title',
+          path: 'edit/:id',
           name: 'edit',
           component: Edit
         },

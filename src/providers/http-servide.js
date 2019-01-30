@@ -159,7 +159,13 @@ export const server = {
     getFileList(paramObj){
         return fetch('/api/fileList',paramObj);
     },
-    PushFileList(paramObj){
+    addFile(paramObj){
         return post('/api/fileSave',paramObj);
+    },
+    editFile(paramObj){
+        return post('/api/fileDetail',paramObj)
+    },
+    updateFile(paramObj){
+        return post('/api/fileEdit',paramObj)
     }
 }
