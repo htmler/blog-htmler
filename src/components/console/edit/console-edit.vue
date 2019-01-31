@@ -153,8 +153,8 @@ export default {
   width: 800px;
   margin: 0 auto;
 }
-.bg-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
+  .el-upload {
+    border: 1px dashed #d9d9d9 !important;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
