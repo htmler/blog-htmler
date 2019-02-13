@@ -8,7 +8,7 @@
     </div>
     <div class="technique-body">
       <div class="body-project" v-for="item in techniqueList">
-        <singlecolumnb></singlecolumnb>
+        <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
     </div>
 </div>
@@ -43,7 +43,7 @@ export default {
         {name:'xx',id: 2},
         {name:'xx',id: 3},
         {name:'xx',id: 4},
-      ]
+      ],
     };
   },
   methods:{
@@ -66,6 +66,13 @@ export default {
   },
   created(){
     window.addEventListener('scroll',this.showConsole)
+    this.ruleForm = {
+      ...this.ruleForm,
+      tag:'hc'
+    }
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.techniqueList = obj;
+    });
   },
   destroyed(){
     window.removeEventListener('scroll',this.showConsole)

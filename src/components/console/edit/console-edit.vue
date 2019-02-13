@@ -11,7 +11,7 @@
                 <el-form-item label="文章背景图" prop="imageUrl">
                     <el-upload
                       class="bg-uploader"
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="http://localhost:3000/api/fileUpload"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload">

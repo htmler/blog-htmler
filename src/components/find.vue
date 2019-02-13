@@ -5,7 +5,7 @@
     </div>
     <div class="find-body">
       <div class="body-project" v-for="item in techniqueList">
-        <singlecolumnb></singlecolumnb>
+        <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
     </div>
 </div>
@@ -36,6 +36,13 @@ export default {
   methods:{
   },
   created(){
+    this.ruleForm = {
+      ...this.ruleForm,
+      tag:'discovery'
+    }
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.techniqueList = obj;
+    });
   }
 };
 </script>

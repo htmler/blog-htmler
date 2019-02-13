@@ -1,13 +1,13 @@
 <template>
-<router-link :to = "'/detail/2'" target="_blank"> 
+<router-link :to = "{name:'detail',params:{id:coldata._id}}" target="_blank"> 
     <div class="column-container">
-        <div class="container-title">冷幻觉</div>
+        <div class="container-title">{{coldata.title}}</div>
         <div class="container-img">
-            <img src="../assets/bg-column.jpg" alt="">
+            <img :src="coldata.imageUrl" alt="">
         </div>
         <div class="container-bottom">
             <div class="bottom-summary">
-                <span>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</span>
+                <span>{{coldata.desc}}</span>
             </div>
             <div class="bottom-more">
                 <span>阅读全文 ></span>
@@ -22,6 +22,12 @@ export default {
   name: "single-column",
   data() {
     return {};
+  },
+  props:{
+      coldata:{
+          type:Object,
+          required: true,
+      },
   }
 };
 </script>

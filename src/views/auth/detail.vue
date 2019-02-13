@@ -12,20 +12,20 @@
             </div>
             </div>
        </div>
-       <div class="container-img">
+       <div class="container-img" :style="{backgroundImage: 'url(' + dataObj.imageUrl + ')', backgroundRepeat:'no-repeat'}">
            <div class="img-txt">
-               <div class="img-title">亲爱的她</div>
+               <div class="img-title">{{dataObj.title}}</div>
                 <div class="img-name-time">
-                    <span class="name-txt">夏哲</span>
+                    <span class="name-txt">{{dataObj.author}}</span>
                     <span class="name-line">|</span>
-                    <span class="name-time">3天前</span>
+                    <span class="name-time">{{dataObj.date1}}</span>
                 </div>
            </div>
            <div class="img-cover"></div>
        </div>
        <div class="container-body">
            <div class="body-left">
-               <detailcontent></detailcontent>
+               <detailcontent :dataShow = "dataObj"></detailcontent>
            </div>
            <div class="body-right">
                <detailhot></detailhot>
@@ -42,8 +42,14 @@ export default {
   components: { Detailcontent, Detailhot },
   data() {
     return {
-      array: [{ name: "首页", id: 1, link: "/home" }]
+      array: [{ name: "首页", id: 1, link: "/home" }],
+      dataObj:Object,
     };
+  },
+  created(){
+    this.$server.editFile(this.$route.params).then(obj => {
+      this.dataObj = obj;
+    });
   }
 };
 </script>

@@ -2,17 +2,15 @@
     <div class="detail-content-container">
         <div class="container-logo">
             <ul class="logo-list">
-                <li>精选</li>
-                <li>原创</li>
-                <li>故事</li>
-                <li>情感</li>
+                <li v-for="item in dataShow.type">{{item}}</li>
             </ul>
             <div class="logo-author">
                 <img src="../assets/d_avatar.png" alt="">
             </div>
         </div>
         <div class="container-content">
-            <video src="../assets/1.mp4" controls></video>
+            <!-- <video src="../assets/1.mp4" controls></video> -->
+            <div v-html="dataShow.content"></div>
         </div>
         <div class="container-end">
             <div class="end-name">THE END</div>
@@ -29,6 +27,10 @@ export default {
   name: "detail-content",
   data() {
     return {};
+  },
+  props:{
+      dataShow:{
+      }
   }
 };
 </script>
@@ -75,7 +77,7 @@ export default {
     .container-content{
         margin-top: 30px;
         min-height: 300px;
-        background-color: #000;
+        // background-color: #000;
         video{
             width: 100%;
             height: 100%;
