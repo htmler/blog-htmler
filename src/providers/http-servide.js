@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Upload } from 'element-ui';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='http://localhost:3000'; //填写域名
@@ -167,5 +168,8 @@ export const server = {
     },
     updateFile(paramObj){
         return post('/api/fileEdit',paramObj)
+    },
+    uploadFile(paramObj){
+      return post('/api/fileUpload',paramObj)
     }
 }

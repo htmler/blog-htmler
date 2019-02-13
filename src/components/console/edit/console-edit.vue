@@ -63,6 +63,7 @@ export default {
   components: { mavonEditor },
   data() {
     return {
+      img_file:[],
       ruleForm: {
         title: "",
         author: "",
@@ -103,8 +104,7 @@ export default {
   },
   methods: {
      handleAvatarSuccess(res, file) {
-        this.ruleForm.imageUrl = URL.createObjectURL(file.raw);
-        console.log(this.ruleForm.imageUrl)
+        this.ruleForm.imageUrl = res.imgUrl;
     },
     beforeAvatarUpload(file) { 
         const isJPG = file.type === 'image/jpeg';
@@ -119,7 +119,19 @@ export default {
         return isJPG && isLt2M;
     },
     changeMavon() {},
-    $imgAdd() {},
+    $imgAdd(pos, $file) {
+      // 第一步.将图片上传到服务器.
+      console.log($file)
+          var formdata = new FormData();
+          formdata.append('image', $file);
+          this.img_file[pos] = $file;
+          this.$server.uploadFile(formdata).then((res) => {
+            console.log(res)
+              let _res = res.data;
+              // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+              this.$refs.md.$img2Url(pos, _res.url);
+          })
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
