@@ -3,10 +3,13 @@
     <div class="find-banner">
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
-    <div class="find-body">
+    <div class="find-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
         <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
+    </div>
+    <div class="find-body" v-if="techniqueList.length <1">
+        <defaultbox></defaultbox>
     </div>
 </div>
 </template>
@@ -14,9 +17,10 @@
 <script>
 import Headernav from "./header-nav";
 import Singlecolumnb from "./single-column-b";
+import Defaultbox from "./default-box";
 export default {
   name: "find",
-  components: { Headernav, Singlecolumnb},
+  components: { Headernav, Singlecolumnb, Defaultbox},
   data() {
     return {
       headerTitle: {

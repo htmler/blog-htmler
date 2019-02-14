@@ -5,7 +5,7 @@
   </div>
   <div class="container-body">
     <ul class="body-list">
-      <li v-for="item in navList">
+      <li v-for="item in navList" @click="reload(item)">
         <div class="li-squar">
         </div>
         <div class="li-content">{{item.name}}</div>
@@ -34,6 +34,12 @@ export default {
     navList: {
       required: true,
       type: Array
+    }
+  },
+  methods:{
+    reload(item){
+      console.log(item.tag)
+      this.$emit('showdata',[item.tag])
     }
   }
 };

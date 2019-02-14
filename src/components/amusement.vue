@@ -6,10 +6,13 @@
     <div class="amusement-list">
         <homebanner></homebanner>
     </div>
-    <div class="amusement-body">
+    <div class="amusement-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
         <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
+    </div>
+    <div class="amusement-body" v-if="techniqueList.length <1">
+        <defaultbox></defaultbox>
     </div>
 </div>
 </template>
@@ -18,9 +21,10 @@
 import Headernav from "./header-nav";
 import Singlecolumnb from "./single-column-b";
 import Homebanner from "./home-banner";
+import Defaultbox from "./default-box";
 export default {
   name: "amusement",
-  components: { Headernav, Singlecolumnb, Homebanner},
+  components: { Headernav, Singlecolumnb, Homebanner,Defaultbox},
   data() {
     return {
       headerTitle: {

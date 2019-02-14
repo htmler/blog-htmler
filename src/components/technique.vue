@@ -6,10 +6,13 @@
     <div class="technique-nav" ref="techniquenav">
       <typenav :navList = "showList"></typenav>
     </div>
-    <div class="technique-body">
+    <div class="technique-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
         <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
+    </div>
+    <div class="technique-body" v-if="techniqueList.length <1">
+        <defaultbox></defaultbox>
     </div>
 </div>
 </template>
@@ -18,9 +21,10 @@
 import Headernav from "./header-nav";
 import Typenav from "./type-nav";
 import Singlecolumnb from "./single-column-b";
+import Defaultbox from "./default-box";
 export default {
   name: "technique",
-  components: { Headernav, Typenav, Singlecolumnb},
+  components: { Headernav, Typenav, Singlecolumnb, Defaultbox},
   data() {
     return {
       isScroll: true,

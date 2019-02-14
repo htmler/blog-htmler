@@ -3,10 +3,13 @@
     <div class="continent-banner" ref="baner">
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
-    <div class="continent-body">
+    <div class="continent-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
         <singlecolumnb :coldata = "item"></singlecolumnb>
       </div>
+    </div>
+    <div class="continent-body" v-if="techniqueList.length <1">
+        <defaultbox></defaultbox>
     </div>
 </div>
 </template>
@@ -14,9 +17,10 @@
 <script>
 import Headernav from "./header-nav";
 import Singlecolumnb from "./single-column-b";
+import Defaultbox from "./default-box";
 export default {
   name: "continent",
-  components: { Headernav, Singlecolumnb},
+  components: { Headernav, Singlecolumnb, Defaultbox},
   data() {
     return {
       headerTitle: {

@@ -13,7 +13,7 @@
     </div>
     <div class="homepage-study">
         <div class="study-left">
-            <studybox :title = "'头条'"></studybox>
+            <studybox :title = "'头条'" v-on:showdata = "showdata"></studybox>
         </div>
         <div class="study-right">
             <tiptree :title = "'技术'" :navList = "navList1"></tiptree>
@@ -42,18 +42,18 @@ export default {
   data() {
     return {
       navList1: [
-        { name: "HTML+CSS", id: 0 },
-        { name: "JavaScript", id: 1 },
-        { name: "前端框架", id: 2 },
-        { name: "Nodejs", id: 3 },
-        { name: "其他", id: 4 }
+        { name: "HTML+CSS", tag: 'hc' },
+        { name: "JavaScript", tag: 'js' },
+        { name: "前端框架", tag: 'frame' },
+        { name: "Nodejs", tag: 'node' },
+        { name: "其他", tag: 'other' }
       ],
       navList2: [
-        { name: "小酒馆", id: 0 },
-        { name: "音乐电影", id: 1 },
-        { name: "资源分享", id: 2 },
-        { name: "发现", id: 3 },
-        { name: "其他", id: 4 }
+        { name: "小酒馆", tag: 'continent' },
+        { name: "音乐", tag: 'music' },
+        { name: "电影", tag: 'video' },
+        { name: "资源分享", tag: 'resource' },
+        { name: "发现", tag: 'discovery' },
       ],
       headerTitle: {
         ch: "首页",
@@ -61,6 +61,11 @@ export default {
       },
       headerContent: "你的故事讲到了哪"
     };
+  },
+  methods:{
+    showdata(tag){
+      console.log(111);
+    }
   }
 };
 </script>
