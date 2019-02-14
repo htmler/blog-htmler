@@ -37,6 +37,7 @@
 <script>
 import Detailcontent from "../../components/detail-content.vue";
 import Detailhot from "../../components/detail-hot";
+import marked from 'marked';
 export default {
   name: "detail",
   components: { Detailcontent, Detailhot },
@@ -49,6 +50,7 @@ export default {
   created(){
     this.$server.editFile(this.$route.params).then(obj => {
       this.dataObj = obj;
+      this.dataObj.content = marked(this.dataObj.content);
     });
   }
 };

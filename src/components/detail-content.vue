@@ -10,7 +10,7 @@
         </div>
         <div class="container-content">
             <!-- <video src="../assets/1.mp4" controls></video> -->
-            <div v-html="dataShow.content"></div>
+            <div v-html="dataShow.content" v-highlight></div>
         </div>
         <div class="container-end">
             <div class="end-name">THE END</div>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import 'highlight.js/styles/googlecode.css'
 export default {
   name: "detail-content",
   data() {
