@@ -4,7 +4,7 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="technique-nav" ref="techniquenav">
-      <typenav :navList = "showList"></typenav>
+      <typenav :navList = "showList" v-on:changeType = "showdata"></typenav>
     </div>
     <div class="technique-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
@@ -35,11 +35,11 @@ export default {
       },
       headerContent: "浅谈人生",
       showList: [
-        { name: "HTML+CSS", id: 0 },
-        { name: "Javascript", id: 1 },
-        { name: "前端框架", id: 2 },
-        { name: "Nodejs", id: 3 },
-        { name: "其他", id: 4 }
+        { name: "HTML+CSS", tag:'hc' },
+        { name: "Javascript", tag:'js' },
+        { name: "前端框架", tag:'frame' },
+        { name: "Nodejs", tag:'node' },
+        { name: "其他", tag:'other' }
       ],
       techniqueList:[
         {name:'xx',id: 0},
@@ -66,6 +66,15 @@ export default {
         this.navBar.style.top = '80px';
         this.$refs.baner.style.paddingBottom = '50px';
       }
+    },
+    showdata(tag){
+      this.ruleForm = {
+      ...this.ruleForm,
+      tag:tag
+    }
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.techniqueList = obj;
+    });
     }
   },
   created(){

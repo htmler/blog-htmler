@@ -5,7 +5,7 @@
   </div>
   <div class="container-body">
     <ul class="body-list">
-      <li v-for="item in navList" @click="reload(item)">
+      <li v-for="(item,index) in navList" @click="reload(item,index)" ref="lilist">
         <div class="li-squar">
         </div>
         <div class="li-content">{{item.name}}</div>
@@ -23,6 +23,7 @@ export default {
   name: "tiptree",
   data() {
     return {
+      index:0,
     };
   },
   props: {
@@ -37,8 +38,18 @@ export default {
     }
   },
   methods:{
-    reload(item){
+    reload(item,index){
+      this.index = index;
+      this.$refs.lilist[index].style.transform = 'translateX(-75px)';
       this.$emit('showdata',item.tag)
+    }
+  },
+  watch: {
+    index: {
+      deep: true,
+      handler: function(newVal, oldVal) {
+        this.$refs.lilist[oldVal].style.transform = 'translateX(-55px)';
+      }
     }
   }
 };
@@ -80,7 +91,7 @@ export default {
         margin-bottom: 15px;
         transition: all 0.3s;
         cursor: pointer;
-        &:hover {
+        &:nth-of-type(1){
           transform: translateX(-75px);
         }
         .li-squar {

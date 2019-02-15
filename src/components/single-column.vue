@@ -1,4 +1,5 @@
 <template>
+<router-link :to = "{name:'detail',params:{id:dataObj._id}}" target="_blank"> 
     <div class="column-container">
         <div class="container-top">
           <img :src="dataObj.imageUrl" alt="">
@@ -11,10 +12,11 @@
             </div>
             <div class="bottom-content">
                 <span class="content-txt">{{dataObj.desc}}</span>
-                <span class="content-more">查看原文 -></span>
+                <!-- <span class="content-more">查看原文 -></span> -->
             </div>
         </div>
     </div>
+    </router-link>
 </template>
 
 <script>
@@ -23,9 +25,9 @@ export default {
   data() {
     return {};
   },
-  props:{
-    dataObj:{
-      type:Object
+  props: {
+    dataObj: {
+      type: Object
     }
   }
 };
@@ -37,9 +39,9 @@ export default {
   width: 100%;
   height: 100%;
   cursor: pointer;
-  &:hover{
-    .container-top{
-      img{
+  &:hover {
+    .container-top {
+      img {
         transform: scale(1.2);
       }
     }
@@ -49,7 +51,7 @@ export default {
     height: 75%;
     border-radius: 5px;
     overflow: hidden;
-    img{
+    img {
       width: 100%;
       height: 100%;
       transition: all 0.3s;

@@ -4,10 +4,13 @@
         <span class="title-name">{{title}}</span>
     </div>
     <div class="left-container">
-        <ul class="container-list">
+        <ul class="container-list" v-if="dataList.length > 0">
             <li v-for="item in dataList">
                 <singlecolumn :dataObj = "item"></singlecolumn>
             </li>
+        </ul>
+        <ul class="container-list" v-if="dataList.length < 1">
+              <defaultbox></defaultbox>
         </ul>
     </div>
 </div>
@@ -15,9 +18,10 @@
 
 <script>
 import Singlecolumn from "./single-column";
+import Defaultbox from "./default-box";
 export default {
   name: "study-box",
-  components: { Singlecolumn },
+  components: { Singlecolumn, Defaultbox },
   data() {
     return {
       dataList: []
@@ -42,19 +46,18 @@ export default {
           tag: this.type
         };
         this.$server.getFileList(this.ruleForm).then(obj => {
-          this.dataList = obj.slice(0,6);
-          console.log(this.dataList);
+          this.dataList = obj.slice(0, 6);
         });
       }
     }
   },
   created() {
+    console.log(this.type);
     this.ruleForm = {
       tag: this.type
     };
     this.$server.getFileList(this.ruleForm).then(obj => {
-      this.dataList = obj.slice(0,6);
-      console.log(this.dataList);
+      this.dataList = obj.slice(0, 6);
     });
   }
 };
@@ -82,6 +85,9 @@ export default {
       flex-wrap: wrap;
       padding: 20px;
       box-sizing: border-box;
+      .default-box{
+        height: 100%;
+      }
       li {
         width: 290px;
         height: 200px;

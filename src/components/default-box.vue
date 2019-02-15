@@ -46,7 +46,7 @@ export default {
     flex-direction: column;
     align-items: center;
     background-color: #f7f7f7;
-    height: 300px;
+    min-height: 300px;
     .box-img{
         width: 100px;
         img{
