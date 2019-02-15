@@ -1,16 +1,16 @@
 <template>
     <div class="column-container">
         <div class="container-top">
-          <img src="../assets/bg-column.jpg" alt="">
+          <img :src="dataObj.imageUrl" alt="">
         </div>
         <div class="container-bottom">
             <div class="bottom-title">
-                <span class="title-tip">原创</span>
-                <span class="title-txt">如何使用css</span>
-                <span class="title-time">2018-09-05</span>
+                <span class="title-tip">{{dataObj.type.slice(0,1)[0]}}</span>
+                <span class="title-txt">{{dataObj.title}}</span>
+                <span class="title-time">{{dataObj.date1}}</span>
             </div>
             <div class="bottom-content">
-                <span class="content-txt">简单说就是aaaaaaaaaaaaaaaaaaaaaaaaa</span>
+                <span class="content-txt">{{dataObj.desc}}</span>
                 <span class="content-more">查看原文 -></span>
             </div>
         </div>
@@ -22,6 +22,11 @@ export default {
   name: "single-column",
   data() {
     return {};
+  },
+  props:{
+    dataObj:{
+      type:Object
+    }
   }
 };
 </script>

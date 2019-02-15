@@ -5,8 +5,8 @@
     </div>
     <div class="left-container">
         <ul class="container-list">
-            <li v-for="item in [1,2,3,4,5,6]">
-                <singlecolumn></singlecolumn>
+            <li v-for="item in dataList">
+                <singlecolumn :dataObj = "item"></singlecolumn>
             </li>
         </ul>
     </div>
@@ -19,13 +19,43 @@ export default {
   name: "study-box",
   components: { Singlecolumn },
   data() {
-    return {};
+    return {
+      dataList: []
+    };
   },
   props: {
     title: {
       default: "精选",
       type: String
+    },
+    type: {
+      default: "hc",
+      type: String
     }
+  },
+  watch: {
+    type: {
+      deep: true,
+      handler: function(newVal, oldVal) {
+        this.type = newVal;
+        this.ruleForm = {
+          tag: this.type
+        };
+        this.$server.getFileList(this.ruleForm).then(obj => {
+          this.dataList = obj.slice(0,6);
+          console.log(this.dataList);
+        });
+      }
+    }
+  },
+  created() {
+    this.ruleForm = {
+      tag: this.type
+    };
+    this.$server.getFileList(this.ruleForm).then(obj => {
+      this.dataList = obj.slice(0,6);
+      console.log(this.dataList);
+    });
   }
 };
 </script>
@@ -59,7 +89,7 @@ export default {
         margin-bottom: 10px;
         box-sizing: border-box;
         border: 1px solid #efefef;
-        padding: 10px;        
+        padding: 10px;
       }
     }
   }

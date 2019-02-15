@@ -38,8 +38,7 @@ export default {
   },
   methods:{
     reload(item){
-      console.log(item.tag)
-      this.$emit('showdata',[item.tag])
+      this.$emit('showdata',item.tag)
     }
   }
 };

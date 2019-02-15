@@ -13,10 +13,10 @@
     </div>
     <div class="homepage-study">
         <div class="study-left">
-            <studybox :title = "'头条'" v-on:showdata = "showdata"></studybox>
+            <studybox :title = "'头条'" :type = "typeData"></studybox>
         </div>
         <div class="study-right">
-            <tiptree :title = "'技术'" :navList = "navList1"></tiptree>
+            <tiptree :title = "'技术'" v-on:showdata = "showdata" :navList = "navList1"></tiptree>
         </div>
     </div>
     <div class="homepage-column">
@@ -41,6 +41,7 @@ export default {
   components: { Tiptree, Studybox, Homesummary, Homebanner, Headernav },
   data() {
     return {
+      typeData:'',
       navList1: [
         { name: "HTML+CSS", tag: 'hc' },
         { name: "JavaScript", tag: 'js' },
@@ -64,7 +65,7 @@ export default {
   },
   methods:{
     showdata(tag){
-      console.log(111);
+      this.typeData = tag;
     }
   }
 };

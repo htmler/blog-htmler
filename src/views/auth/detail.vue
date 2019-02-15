@@ -106,7 +106,7 @@ export default {
     margin-top: 80px;
     height: 350px;
     background: url(../../assets/bg-column.jpg) no-repeat;
-    background-size: 100%;
+    background-size: 100% 100%;
     position: relative;
     .img-cover {
       position: absolute;
