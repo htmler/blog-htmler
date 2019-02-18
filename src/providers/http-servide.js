@@ -163,6 +163,9 @@ export const server = {
   getHomeBanner(paramObj) {
     return fetch('/api/fileBannerList');
   },
+  getAmuseBanner(paramObj) {
+    return fetch('/api/fileAmuseBannerList');
+  },
   getFileList(paramObj) {
     return fetch('/api/fileList', paramObj);
   },

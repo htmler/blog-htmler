@@ -44,7 +44,8 @@
             </el-form-item>
             <el-form-item label="内容" prop="content">
                 <!-- <el-input type="textarea" v-model="ruleForm.content"></el-input> -->
-                <mavonEditor v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <mavonEditor v-if="!isAmusement" v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <div v-if="isAmusement">视频内容</div>
             </el-form-item>
             <el-form-item> 
                 <el-button type="primary" @click="submitForm('ruleForm')">立即修改</el-button>
@@ -63,7 +64,8 @@ export default {
   components: { mavonEditor },
   data() {
     return {
-      img_file:[],
+      isAmusement:false,
+      img_file: [],
       ruleForm: {
         title: "",
         author: "",
@@ -103,40 +105,40 @@ export default {
     };
   },
   methods: {
-     handleAvatarSuccess(res, file) {
-        this.ruleForm.imageUrl = res.imgUrl;
+    handleAvatarSuccess(res, file) {
+      this.ruleForm.imageUrl = res.imgUrl;
     },
-    beforeAvatarUpload(file) { 
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
 
-        if (!isJPG) {
-          this.$message.error('上传背景图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
+      if (!isJPG) {
+        this.$message.error("上传背景图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
     },
     changeMavon() {},
     $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
-      console.log($file)
-          var formdata = new FormData();
-          formdata.append('image', $file);
-          this.img_file[pos] = $file;
-          this.$server.uploadFile(formdata).then((res) => {
-            console.log(res)
-              let _res = res.data;
-              // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-              this.$refs.md.$img2Url(pos, _res.url);
-          })
+      console.log($file);
+      var formdata = new FormData();
+      formdata.append("image", $file);
+      this.img_file[pos] = $file;
+      this.$server.uploadFile(formdata).then(res => {
+        console.log(res);
+        let _res = res.data;
+        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+        this.$refs.md.$img2Url(pos, _res.url);
+      });
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$server.updateFile(this.ruleForm).then(obj => {
-            this.$router.push({path:`/console/${this.ruleForm.tag}`});
+            this.$router.push({ path: `/console/${this.ruleForm.tag}` });
           });
         } else {
           console.log("error submit!!");
@@ -152,7 +154,10 @@ export default {
     this.$server.editFile(this.$route.params).then(obj => {
       this.ruleForm = {
         ...this.ruleForm,
-        ...obj,
+        ...obj
+      };
+      if (this.ruleForm.tag === "video" || this.ruleForm.tag === "music") {
+        this.isAmusement = true;
       }
     });
   }
@@ -165,27 +170,27 @@ export default {
   width: 800px;
   margin: 0 auto;
 }
-  .el-upload {
-    border: 1px dashed #d9d9d9 !important;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 300px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    height: 178px;
-    display: block;
-  }
+.el-upload {
+  border: 1px dashed #d9d9d9 !important;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 300px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  height: 178px;
+  display: block;
+}
 </style>
 

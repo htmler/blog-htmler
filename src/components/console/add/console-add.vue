@@ -44,7 +44,8 @@
             </el-form-item>
             <el-form-item label="内容" prop="content">
                 <!-- <el-input type="textarea" v-model="ruleForm.content"></el-input> -->
-                <mavonEditor v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <mavonEditor v-if="!isAmusement" v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <div v-if="isAmusement" v-model="ruleForm.content">视频文件</div>
             </el-form-item>
             <el-form-item> 
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -63,6 +64,7 @@ export default {
   components: { mavonEditor },
   data() {
     return {
+      isAmusement:false,
       ruleForm: {
         title: "",
         author:"",
@@ -105,6 +107,9 @@ export default {
     };
   },
   created(){
+    if(this.$route.params.type === 'video' || this.$route.params.type === 'music'){
+      this.isAmusement = true;
+    }
   },
   methods: {
     handleAvatarSuccess(res, file) {

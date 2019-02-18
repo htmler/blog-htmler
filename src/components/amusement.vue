@@ -4,7 +4,7 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="amusement-list">
-        <homebanner></homebanner>
+        <homebanner :bannerList = "bannerList"></homebanner>
     </div>
     <div class="amusement-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
@@ -32,6 +32,7 @@ export default {
         en: "Amusement"
       },
       headerContent: "芳华",
+      bannerList:'',
       showList: [
         { name: "HTML+CSS", id: 0 },
         { name: "Javascript", id: 1 },
@@ -51,6 +52,9 @@ export default {
   methods:{
   },
   created(){
+    this.$server.getAmuseBanner().then(obj => {
+      this.bannerList = obj;
+    });
     this.ruleForm = {
       ...this.ruleForm,
       tag:'music'
