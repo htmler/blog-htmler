@@ -72,7 +72,8 @@ export default {
         desc: "",
         content: "",
         imageUrl:'',
-        tag:this.$route.params.type
+        tag:this.$route.params.type,
+        view:0
       },
       rules: {
         title: [

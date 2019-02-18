@@ -8,7 +8,7 @@
             <homesummary></homesummary>
         </div>
         <div class="summary-right">
-            <homebanner></homebanner>
+            <homebanner v-if="bannerList" :bannerList = "bannerList"></homebanner>
         </div>
     </div>
     <div class="homepage-study">
@@ -43,6 +43,7 @@ export default {
     return {
       typeData:'hc',
       typeData2:'continent',
+      bannerList:'',
       navList1: [
         { name: "HTML+CSS", tag: 'hc' },
         { name: "JavaScript", tag: 'js' },
@@ -63,6 +64,11 @@ export default {
       },
       headerContent: "你的故事讲到了哪"
     };
+  },
+  created(){
+    this.$server.getHomeBanner().then(obj => {
+      this.bannerList = obj;
+    });
   },
   methods:{
     showdata(tag){
@@ -103,6 +109,7 @@ export default {
     .summary-right {
       width: 78%;
       border-radius: 5px;
+      height: 350px;
       background-color: #fff;
       border: 1px solid #efefef;
       box-sizing: border-box;

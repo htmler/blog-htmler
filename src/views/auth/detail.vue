@@ -50,7 +50,13 @@ export default {
   created(){
     this.$server.editFile(this.$route.params).then(obj => {
       this.dataObj = obj;
+      this.dataObj.view ++;
       this.dataObj.content = marked(this.dataObj.content);
+      this.$server.updateFile(this.dataObj).then(obj => {
+        this.dataObj = {
+          ...this.dataObj
+        }
+      });
     });
   }
 };

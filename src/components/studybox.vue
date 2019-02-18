@@ -45,7 +45,7 @@ export default {
         this.ruleForm = {
           tag: this.type
         };
-        this.$server.getFileList(this.ruleForm).then(obj => {
+        this.$server.getHomeList(this.ruleForm).then(obj => {
           this.dataList = obj.slice(0, 6);
         });
       }
@@ -56,7 +56,7 @@ export default {
     this.ruleForm = {
       tag: this.type
     };
-    this.$server.getFileList(this.ruleForm).then(obj => {
+    this.$server.getHomeList(this.ruleForm).then(obj => {
       this.dataList = obj.slice(0, 6);
     });
   }

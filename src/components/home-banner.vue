@@ -1,12 +1,12 @@
 <template>
     <div class="summary-banner">
             <div class="banner-left">
-              <img class="main-img" src="../assets/banner-1.jpg" alt="">
+              <img class="main-img" :src="bannerList[count].imageUrl" alt="">
             </div>
             <div class="right-nav">
                 <ul class="nav-list">
-                    <li class="list-img" v-for="(item,index) in bannerArray" @mouseover="showBanner" @mouseout="startGrow">  
-                      <img class="nav-img" :src="item.imgurl" alt="">
+                    <li class="list-img" v-for="(item,index) in bannerList" @mouseover="showBanner(item,index)" @mouseout="startGrow">  
+                      <img class="nav-img" v-if="item" :src="bannerList[index].imageUrl" alt="">
                     </li>
                 </ul>
                 </div> 
@@ -18,46 +18,38 @@ export default {
   name: "home-banner",
   data() {
     return {
-      timer:null,
-      count:1,
-      bannerArray:[
-        { name: 'xxx',imgurl:require('../assets/banner-1.jpg')},
-        { name: 'xxx',imgurl:require('../assets/banner-2.jpg')},
-        { name: 'xxx',imgurl:require('../assets/banner-3.jpg')},
-      ]
+      timer: null,
+      count: 0,
     };
   },
-  methods:{
-    showBanner(e){
-      let mainImg = document.getElementsByClassName('main-img')[0];
-      mainImg.src = e.target.src;
-      clearInterval(this.timer);
-      // console.log(e.target.src);
-    },
-    startGrow(e){
-      this.timer = setInterval(() => {
-      let mainImg = document.getElementsByClassName('main-img')[0];
-      let navImg = document.getElementsByClassName('nav-img');
-      this.count++;
-      if(this.count > 3){
-        this.count  = 1;
-      }
-      mainImg.src = require(`../assets/banner-${this.count}.jpg`);
-    }, 3000);
+  props: {
+    bannerList: {
+      type: Array,
     }
   },
-  created(){
+  methods: {
+    showBanner(e, index) {
+      this.count = index;
+      clearInterval(this.timer);
+    },
+    startGrow(e) {
+      this.timer = setInterval(() => {
+        this.count++;
+        if (this.count > 2) {
+          this.count = 0;
+        }
+      }, 3000);
+    }
+  },
+  created() {
     this.timer = setInterval(() => {
-      let mainImg = document.getElementsByClassName('main-img')[0];
-      let navImg = document.getElementsByClassName('nav-img');
       this.count++;
-      if(this.count > 3){
-        this.count  = 1;
+      if (this.count > 2) {
+        this.count = 0;
       }
-      mainImg.src = require(`../assets/banner-${this.count}.jpg`);
     }, 3000);
   },
-  destroyed(){
+  destroyed() {
     clearInterval(this.timer);
   }
 };
@@ -75,7 +67,7 @@ export default {
     height: 100%;
     border-radius: 5px;
     cursor: pointer;
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
@@ -98,10 +90,10 @@ export default {
         border-radius: 5px;
         cursor: pointer;
         transition: all 0.3s;
-        &:hover{
+        &:hover {
           transform: scale(1.2);
         }
-        img{
+        img {
           width: 100%;
           height: 100%;
         }
