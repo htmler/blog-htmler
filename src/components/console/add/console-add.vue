@@ -42,11 +42,22 @@
             <el-form-item label="简介" prop="desc">
                 <el-input type="textarea" v-model="ruleForm.desc"></el-input>
             </el-form-item>
-            <el-form-item label="内容" prop="content">
+            <el-form-item label="内容" prop="content" v-if="!isAmusement">
                 <!-- <el-input type="textarea" v-model="ruleForm.content"></el-input> -->
-                <mavonEditor v-if="!isAmusement" v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
-                <div v-if="isAmusement" v-model="ruleForm.content">视频文件</div>
+                <mavonEditor v-model="ruleForm.content" :subfield = 'false' ref="md" @imgAdd="$imgAdd"  @change="changeMavon"/>
+                <!-- <div v-if="isAmusement" v-model="ruleForm.content">视频文件</div> -->
             </el-form-item>
+            <el-form-item v-if="isAmusement" label="上传资源" prop="mvSrc">
+                    <el-upload
+                      class="bg-uploader"
+                      action="http://localhost:3000/api/fileUpload"
+                      :show-file-list="false"
+                      :on-success="handleVideoSuccess"
+                      :before-upload="beforeVideoUpload">
+                      <video v-if="ruleForm.mvSrc" :src="ruleForm.mvSrc" class="avatar"></video>
+                      <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                </el-form-item>
             <el-form-item> 
                 <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
                 <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -74,6 +85,7 @@ export default {
         desc: "",
         content: "",
         imageUrl:'',
+        mvSrc:'',
         tag:this.$route.params.type,
         view:0
       },
@@ -112,8 +124,14 @@ export default {
     }
   },
   methods: {
+    handleVideoSuccess(res,file) {
+      this.ruleForm.mvSrc = res.imgUrl;
+    },
     handleAvatarSuccess(res, file) {
         this.ruleForm.imageUrl = res.imgUrl;
+    },
+    beforeVideoUpload(file) {
+
     },
     beforeAvatarUpload(file) { 
         const isJPG = file.type === 'image/jpeg';

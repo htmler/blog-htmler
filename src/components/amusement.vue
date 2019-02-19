@@ -4,7 +4,7 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="amusement-list">
-        <homebanner :bannerList = "bannerList"></homebanner>
+        <homebanner v-if="bannerList" :bannerList = "bannerList"></homebanner>
     </div>
     <div class="amusement-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
@@ -24,7 +24,7 @@ import Homebanner from "./home-banner";
 import Defaultbox from "./default-box";
 export default {
   name: "amusement",
-  components: { Headernav, Singlecolumnb, Homebanner,Defaultbox},
+  components: { Headernav, Singlecolumnb, Homebanner, Defaultbox },
   data() {
     return {
       headerTitle: {
@@ -32,7 +32,7 @@ export default {
         en: "Amusement"
       },
       headerContent: "芳华",
-      bannerList:'',
+      bannerList: "",
       showList: [
         { name: "HTML+CSS", id: 0 },
         { name: "Javascript", id: 1 },
@@ -40,26 +40,21 @@ export default {
         { name: "Nodejs", id: 3 },
         { name: "其他", id: 4 }
       ],
-      techniqueList:[
-        {name:'xx',id: 0},
-        {name:'xx',id: 1},
-        {name:'xx',id: 2},
-        {name:'xx',id: 3},
-        {name:'xx',id: 4},
+      techniqueList: [
+        { name: "xx", id: 0 },
+        { name: "xx", id: 1 },
+        { name: "xx", id: 2 },
+        { name: "xx", id: 3 },
+        { name: "xx", id: 4 }
       ]
     };
   },
-  methods:{
-  },
-  created(){
+  methods: {},
+  created() {
     this.$server.getAmuseBanner().then(obj => {
       this.bannerList = obj;
     });
-    this.ruleForm = {
-      ...this.ruleForm,
-      tag:'music'
-    }
-    this.$server.getFileList(this.ruleForm).then(obj => {
+    this.$server.getAmuseList().then(obj => {
       this.techniqueList = obj;
     });
   }
@@ -78,22 +73,22 @@ export default {
     height: 180px;
     position: relative;
   }
-  .amusement-list{
-      width: 1200px;
-      margin: 20px auto 0;
-      height: 300px;
-  }
-  .amusement-body{
+  .amusement-list {
     width: 1200px;
     margin: 20px auto 0;
-    display: flex; 
+    height: 300px;
+  }
+  .amusement-body {
+    width: 1200px;
+    margin: 20px auto 0;
+    display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    .body-project{
-      width: 350px; 
+    .body-project {
+      width: 350px;
       height: 300px;
       margin-right: 75px;
-      &:nth-of-type(3n){
+      &:nth-of-type(3n) {
         margin-right: 0;
       }
     }

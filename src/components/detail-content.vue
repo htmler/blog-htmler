@@ -9,8 +9,8 @@
             </div>
         </div>
         <div class="container-content">
-            <!-- <video src="../assets/1.mp4" controls></video> -->
-            <div v-html="dataShow.content" v-highlight></div>
+            <video v-if="dataShow.mvSrc" :src="dataShow.mvSrc" controls></video>
+            <div v-if="dataShow.content" v-html="dataShow.content" v-highlight></div>
         </div>
         <div class="container-end">
             <div class="end-name">THE END</div>
