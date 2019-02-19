@@ -157,6 +157,12 @@ export function put(url, data = {}) {
 * 方式：fetch/post/patch/put
 */
 export const server = {
+  register(paramObj) {
+    return post('/api/register', paramObj);
+  },
+  login(paramObj) {
+    return fetch('/api/login', paramObj);
+  },
   getHomeList(paramObj) {
     return fetch('/api/fileHomeList', paramObj);
   },

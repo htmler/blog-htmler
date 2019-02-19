@@ -10,7 +10,30 @@
         <li v-for="item in array"><router-link :to = "item.link">{{item.name}}</router-link></li>
       </ul>
     </div>
-    <div class="header-console"><router-link to = "/console" target = "_blank">后台管理</router-link></div>
+    <div class="header-handle" v-if="!isLogin">
+      <ul class="handle-list">
+        <li @click="dialogVisible = true">注册</li>
+        <li @click="loginVisible = true">登录</li>
+      </ul>
+    </div>
+    <div class="header-info" v-if="isLogin">
+      <ul class="handle-list">
+        <li>
+          <el-popover
+            placement="top"
+            width="160"
+            v-model="visible2">
+            <p>是否注销</p>
+            <div style="text-align: right; margin: 0">
+              <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
+              <el-button type="primary" size="mini" @click="visible2 = false;isLogin = false">确定</el-button>
+            </div>
+            <el-button slot="reference">欢迎{{userInfo.username}}</el-button>
+          </el-popover>
+        </li>
+      </ul>
+    </div>
+    <div v-if="isroot" class="header-console"><router-link to = "/console" target = "_blank">后台管理</router-link></div>
     </div>
   </div>
 <router-view/>
@@ -18,6 +41,55 @@
   <div class="footer-nav"></div>
   <div class="font-info"></div>
 </div>
+<el-dialog
+  title="注册"
+  :visible.sync="dialogVisible"
+  width="30%">
+  <div class="register-form">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username">
+            <el-input v-model="ruleForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+            <el-input type="password" v-model="ruleForm.password"></el-input>
+        </el-form-item>
+        <el-form-item label="头像" prop="avatar">
+            <el-upload
+              class="avatar-uploader"
+              action="http://localhost:3000/api/fileUpload"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload">
+              <img v-if="ruleForm.avatar" :src="ruleForm.avatar" class="avatar">
+              <i style="width:100px;height:100px;border:1px solid #efefef;line-height:100px;" v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+        </el-form-item>
+    </el-form>
+  </div>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogVisible = false">取 消</el-button>
+    <el-button type="primary" @click="register">确 定</el-button>
+  </span>
+</el-dialog>
+<el-dialog
+  title="注册"
+  :visible.sync="loginVisible"
+  width="30%">
+  <div class="register-form">
+    <el-form :model="loginForm" :rules="loginrules" ref="loginForm" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username">
+            <el-input v-model="loginForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+            <el-input type="password" v-model="loginForm.password"></el-input>
+        </el-form-item>
+    </el-form>
+  </div>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="loginVisible = false">取 消</el-button>
+    <el-button type="primary" @click="login">确 定</el-button>
+  </span>
+</el-dialog>
 </div>
 </template>
 
@@ -26,6 +98,12 @@ export default {
   name: "home",
   data() {
     return {
+      dialogVisible: false,
+      loginVisible: false,
+      isLogin: false,
+      isroot: false,
+      visible2: false,
+      userInfo:'',
       array: [
         { name: "首页", id: 1, link: "/home" },
         { name: "技术贴", id: 2, link: "/technique" },
@@ -33,9 +111,81 @@ export default {
         { name: "音乐电影", id: 4, link: "/amusement" },
         { name: "资源分享", id: 5, link: "/resourse" },
         { name: "发现", id: 6, link: "/discovery" },
-        { name: "留言", id: 7, link: "/discuss" },
-      ]
+        { name: "留言", id: 7, link: "/discuss" }
+      ],
+      ruleForm: {
+        username: "",
+        password: "",
+        avatar: ""
+      },
+      loginForm: {
+        username: "",
+        password: ""
+      },
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 0, max: 20, message: "长度在20个字符以内", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
+        ]
+      },
+      loginrules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 0, max: 20, message: "长度在20个字符以内", trigger: "blur" }
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" }
+        ]
+      }
     };
+  },
+  methods: {
+    handleAvatarSuccess(res, file) {
+      this.ruleForm.avatar = res.imgUrl;
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传背景图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+    register() {
+      this.$server.register(this.ruleForm).then(obj => {
+        if(obj.status){
+           this.dialogVisible = false;
+        }else{
+          this.$message.error(obj.errMessage);
+          this.$refs['ruleForm'].resetFields();
+        }
+      });
+    },
+    login() {
+      this.$server.login(this.loginForm).then(obj => {
+        if(obj.status){
+          if(obj.isSystem){
+            this.isroot = true;
+          }else{
+            this.loginVisible = false;
+            this.isLogin = true;
+            this.userInfo = obj._doc;
+          }
+        }else{
+          this.$refs['loginForm'].resetFields();
+          this.$message.error(obj.errMessage);
+        }
+      });
+    }
   }
 };
 </script>
@@ -52,7 +202,7 @@ export default {
     background-color: #333;
     color: #fff;
     z-index: 99;
-    .header-container{
+    .header-container {
       display: flex;
       height: 80px;
       justify-content: flex-start;
@@ -62,46 +212,83 @@ export default {
       margin: 0 auto;
       position: relative;
       .header-left {
-      font-size: 32px;
-    }
-    .header-right {
-      .right-list {
-        display: flex;
-        justify-content: flex-start;
-        padding: 0 10px;
-        li {
-          height: 35px;
-          font-size: 14px;
-          color: #999;
-          text-align: center;
-          line-height: 35px;
-          border-radius: 5px;
-          padding: 0 20px;
-          cursor: pointer;
-          &:hover {
-            color: #fff;
+        font-size: 32px;
+      }
+      .header-right {
+        .right-list {
+          display: flex;
+          justify-content: flex-start;
+          padding: 0 10px;
+          li {
+            height: 35px;
+            font-size: 14px;
+            color: #999;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 5px;
+            padding: 0 20px;
+            cursor: pointer;
+            &:hover {
+              color: #fff;
+            }
           }
         }
       }
-    }
-    .header-console{
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      font-size: 14px;
-      color: #999;
-      border: 1px solid #999;
-      width: 100px;
-      height: 40px;
-      box-sizing: border-box;
-      text-align: center;
-      line-height: 40px;
-      cursor: pointer;
-      &:hover{
-        color: #fff;
+      .header-handle {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #999;
+        box-sizing: border-box;
+        text-align: center;
+        .handle-list {
+          display: flex;
+          li {
+            cursor: pointer;
+            width: 50px;
+            &:hover {
+              color: #fff;
+            }
+          }
+        }
       }
-    }
+       .header-info {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #999;
+        box-sizing: border-box;
+        text-align: center;
+        .handle-list {
+          display: flex;
+          li {
+            width: 200px;
+            text-align: right;
+          }
+        }
+      }
+      .header-console {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #999;
+        border: 1px solid #999;
+        width: 100px;
+        height: 40px;
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+        &:hover {
+          color: #fff;
+        }
+      }
     }
   }
   .footer {
@@ -114,6 +301,15 @@ export default {
       height: 60px;
       background-color: #343539;
       color: #999;
+    }
+  }
+  .show-form {
+    .el-upload {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #efefef;
+      border-radius: 3px;
+      line-height: 100px;
     }
   }
 }
