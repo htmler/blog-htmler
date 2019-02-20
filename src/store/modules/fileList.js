@@ -8,7 +8,7 @@ export default {
             //你还可以在这里执行其他的操作改变state
         }
     },
-    action:{
+    actions:{
         switch_dialog({commit},payload){
             commit({
                 type:'switch_dialog',

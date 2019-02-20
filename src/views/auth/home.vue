@@ -26,9 +26,9 @@
             <p>是否注销</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
-              <el-button type="primary" size="mini" @click="visible2 = false;isLogin = false">确定</el-button>
+              <el-button type="primary" size="mini" @click="loginOut">确定</el-button>
             </div>
-            <el-button slot="reference">欢迎{{userInfo.username}}</el-button>
+            <el-button slot="reference">欢迎{{$store.state.Token.username}}</el-button>
           </el-popover>
         </li>
       </ul>
@@ -103,7 +103,6 @@ export default {
       isLogin: false,
       isroot: false,
       visible2: false,
-      userInfo:'',
       array: [
         { name: "首页", id: 1, link: "/home" },
         { name: "技术贴", id: 2, link: "/technique" },
@@ -144,6 +143,14 @@ export default {
       }
     };
   },
+  created(){
+    console.log(this.$store.state)
+    if(this.$store.state.Token.token){
+      this.isLogin = true;
+    }else{
+      this.isLogin = false;
+    }
+  },
   methods: {
     handleAvatarSuccess(res, file) {
       this.ruleForm.avatar = res.imgUrl;
@@ -173,18 +180,37 @@ export default {
     login() {
       this.$server.login(this.loginForm).then(obj => {
         if(obj.status){
+          //拿到返回的token和username，并存到store
+          let token = obj.token;
+          let username = obj._doc.username;
+          this.$store.dispatch('UserLogin', token);
+          this.$store.dispatch('UserName', username);
           if(obj.isSystem){
             this.isroot = true;
           }else{
             this.loginVisible = false;
             this.isLogin = true;
-            this.userInfo = obj._doc;
           }
         }else{
           this.$refs['loginForm'].resetFields();
           this.$message.error(obj.errMessage);
         }
       });
+    },
+    loginOut(){
+      this.$store.dispatch('UserLogout');
+      if (!this.$store.state.Token.token) {
+        this.isLogin = false;
+        this.$message({
+        type: 'success',
+        message: '注销成功'
+        })
+      } else {
+        this.$message({
+        type: 'info',
+        message: '注销失败'
+        })
+      }
     }
   }
 };

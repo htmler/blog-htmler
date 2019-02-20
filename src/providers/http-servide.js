@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Upload } from 'element-ui';
+import store from '../store/index';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = 'http://localhost:3000'; //填写域名
@@ -12,6 +13,9 @@ axios.interceptors.request.use(
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
+    if (store.state.Token.token) {
+      config.headers.Authorization = `token ${store.state.Token.token}`;
+     }
     return config;
   },
   error => {
