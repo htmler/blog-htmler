@@ -5,15 +5,15 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="discuss-body">
-        <div class="body-container" v-for="item in [1,2]">
+        <div class="body-container">
             <div class="container-time">
-                <div class="time-year">2018-03</div>
-                <div class="time-date">25</div>
+                <div class="time-year">welcome</div>
+                <div class="time-date">吐槽</div>
             </div>
             <div class="container-discuss">
                 <div class="discuss-user" v-for="item in techniqueList">
                     <div class="user-show">
-                      <discusscolumn></discusscolumn>
+                      <discusscolumn :coldata = "item"></discusscolumn>
                     </div>
                 </div>
             </div>
@@ -27,9 +27,9 @@
         </div>
         <div class="modal-content">
           <div class="content-area">
-            <textarea></textarea>
+            <textarea v-model="discussForm.content"></textarea>
           </div>
-          <div class="content-btn">
+          <div class="content-btn" @click="submit">
             <div class="btn-submit">提交</div>
           </div>
         </div>
@@ -44,33 +44,67 @@ import Singlecolumnb from "./single-column-b";
 import Discusscolumn from "./discuss-column";
 export default {
   name: "discuss",
-  components: { Headernav, Singlecolumnb, Discusscolumn},
+  components: { Headernav, Singlecolumnb, Discusscolumn },
   data() {
     return {
-      isModal : false,
+      isModal: false,
+      discussForm: {
+        username: "",
+        avatar: "",
+        createTime: "",
+        content: ""
+      },
       headerTitle: {
         ch: "留言",
         en: "Message"
       },
       headerContent: "欢迎留言",
-      techniqueList: [
-        { name: "xx", id: 0 },
-        { name: "xx", id: 1 },
-        { name: "xx", id: 2 },
-        { name: "xx", id: 3 },
-        { name: "xx", id: 4 }
-      ]
+      techniqueList: []
     };
   },
   methods: {
-    showModal(){
+    showModal() {
       this.isModal = this.isModal === false ? true : false;
     },
-    closeModal(){
+    closeModal() {
       this.isModal = false;
+    },
+    submit() {
+      if (this.$store.state.Token.token) {
+        let params = {
+          username: this.$store.state.Token.username
+        };
+        this.$server.getUserInfo(params).then(obj => {
+          this.discussForm = {
+            ...this.discussForm,
+            username: obj.username,
+            avatar: obj.avatar,
+            createTime: "2018-03-05"
+          };
+          this.$server.addDiscuss(this.discussForm).then(obj => {
+            this.isModal = false;
+            this.$server.getDiscussList().then(obj => {
+              this.techniqueList = obj;
+            });
+            this.$message({
+              type: "success",
+              message: "评论成功"
+            });
+          });
+        });
+      } else {
+        this.$message({
+          type: "error",
+          message: "您还没有登录，无法发表评论"
+        });
+      }
     }
   },
-  created() {}
+  created() {
+    this.$server.getDiscussList().then(obj => {
+      this.techniqueList = obj;
+    });
+  }
 };
 </script>
 
@@ -81,10 +115,10 @@ export default {
   box-sizing: border-box;
   background-color: #fff;
   padding-bottom: 20px;
-  .discuss-send{
+  .discuss-send {
     position: fixed;
     right: 10px;
-    top:50%;
+    top: 50%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -114,20 +148,20 @@ export default {
         width: 80px;
         height: 80px;
         text-align: center;
-        .time-year{
-            width: 100%;
-            height: 25px;
-            line-height: 25px;
-            background-color: #04ac71;
-            color: #fff;
+        .time-year {
+          width: 100%;
+          height: 25px;
+          line-height: 25px;
+          background-color: #04ac71;
+          color: #fff;
         }
-        .time-date{
-            width: 100%;
-            height: 55px;
-            line-height: 55px;
-            font-size: 26px;
-            font-weight: bold;
-            background-color: #efefef;
+        .time-date {
+          width: 100%;
+          height: 55px;
+          line-height: 55px;
+          font-size: 26px;
+          font-weight: bold;
+          background-color: #efefef;
         }
       }
       .container-discuss {
@@ -145,7 +179,7 @@ export default {
             height: 80px;
             background-color: aliceblue;
             border-radius: 3px;
-            padding-left:20px;
+            padding-left: 20px;
             box-sizing: border-box;
             color: #666;
             overflow: hidden;
@@ -154,7 +188,7 @@ export default {
       }
     }
   }
-  .discuss-show{
+  .discuss-show {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -165,11 +199,11 @@ export default {
     z-index: 99;
     box-sizing: border-box;
     transition: all 0.3s;
-    .show-modal{
+    .show-modal {
       width: 1200px;
       margin: 0 auto;
       position: relative;
-      .modal-close{
+      .modal-close {
         position: absolute;
         right: 0;
         top: 0;
@@ -181,31 +215,31 @@ export default {
         font-size: 20px;
         cursor: pointer;
       }
-      .modal-title{
+      .modal-title {
         font-weight: bold;
         font-size: 20px;
       }
-      .modal-content{
+      .modal-content {
         margin-top: 20px;
         display: flex;
         justify-content: flex-start;
-        .content-area{
-           width: 90%;
-            textarea{
-              outline: none;
-              resize: none;
-              width: 100%;
-              height: 150px;
-              border-radius: 3px;
-              padding:20px;
-              box-sizing: border-box;
-            }
+        .content-area {
+          width: 90%;
+          textarea {
+            outline: none;
+            resize: none;
+            width: 100%;
+            height: 150px;
+            border-radius: 3px;
+            padding: 20px;
+            box-sizing: border-box;
+          }
         }
-        .content-btn{
+        .content-btn {
           display: flex;
           margin-left: 10px;
           align-items: flex-end;
-          .btn-submit{
+          .btn-submit {
             width: 80px;
             height: 40px;
             background-color: #04ac71;
@@ -220,9 +254,9 @@ export default {
       }
     }
   }
-  .discuss-show-active{
+  .discuss-show-active {
     height: 40vh;
-    padding: 20px 0;     
+    padding: 20px 0;
   }
 }
 </style>

@@ -1,5 +1,6 @@
 export default {
     state: {//state
+        isLogin: false,
         token: window.sessionStorage.getItem('token'),
         username: window.sessionStorage.getItem('username'),
     },

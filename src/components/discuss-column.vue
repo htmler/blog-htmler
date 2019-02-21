@@ -1,15 +1,15 @@
 <template>
     <div class="column-container">
         <div class="container-left">
-            <img src="../assets/d_avatar.png" alt="">
+            <img :src="coldata.avatar || '../assets/d_avatar.png'" alt="">
         </div>
         <div class="container-right">
             <div class="right-title">
-                <span class="title-name">张三丰</span>
-                <span class="title-time">2019-03-05</span>
+                <span class="title-name">{{coldata.username}}</span>
+                <span class="title-time">{{coldata.createTime}}</span>
             </div>
             <div class="right-content">
-                张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！张三丰你说的对！    
+                {{coldata.content}}    
             </div>
         </div>
     </div>
@@ -20,6 +20,12 @@ export default {
   name: "discuss-column",
   data() {
     return {};
+  },
+  props: {
+    coldata: {
+      type: Object,
+      required: true
+    }
   }
 };
 </script>
@@ -31,31 +37,32 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  .container-left{
-      width: 50px;
-      height: 50px;
+  .container-left {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      img{
-          width: 100%;
-          height: 100%;
-      }
+    }
   }
-  .container-right{
-      margin-left: 15px;
-      width: 90%;
-      .right-title{
-          font-size: 14px;
-          .title-name{
-              color: #04ac71;
-          }
-          .title-time{
-              padding-left: 10px;
-          }
+  .container-right {
+    margin-left: 15px;
+    width: 90%;
+    .right-title {
+      font-size: 14px;
+      .title-name {
+        color: #04ac71;
       }
-      .right-content{
-          padding-top: 5px;
-          font-size: 14px;
+      .title-time {
+        padding-left: 10px;
       }
+    }
+    .right-content {
+      padding-top: 5px;
+      font-size: 14px;
+    }
   }
 }
 </style>

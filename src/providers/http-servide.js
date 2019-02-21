@@ -34,6 +34,8 @@ axios.interceptors.response.use(response => {
         break;
       case 401:
         console.log('未授权，请重新登录')
+        store.state.Token.isLogin = false;
+        store.dispatch('UserLogout');
         break;
       case 403:
         console.log('拒绝访问')
@@ -161,6 +163,9 @@ export function put(url, data = {}) {
 * 方式：fetch/post/patch/put
 */
 export const server = {
+  judgeToken() {
+    return fetch('/api/status');
+  },
   register(paramObj) {
     return post('/api/register', paramObj);
   },
@@ -193,5 +198,16 @@ export const server = {
   },
   uploadFile(paramObj) {
     return post('/api/fileUpload', paramObj)
+  },
+  //用户信息
+  getUserInfo(paramObj) {
+    return fetch('/api/userInfo', paramObj)
+  },
+  //讨论接口
+  addDiscuss(paramObj) {
+    return post('/api/discussSave', paramObj)
+  },
+  getDiscussList(){
+    return fetch('/api/discussList')
   }
 }

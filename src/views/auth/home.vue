@@ -10,13 +10,13 @@
         <li v-for="item in array"><router-link :to = "item.link">{{item.name}}</router-link></li>
       </ul>
     </div>
-    <div class="header-handle" v-if="!isLogin">
+    <div class="header-handle" v-if="!$store.state.Token.isLogin">
       <ul class="handle-list">
         <li @click="dialogVisible = true">注册</li>
         <li @click="loginVisible = true">登录</li>
       </ul>
     </div>
-    <div class="header-info" v-if="isLogin">
+    <div class="header-info" v-if="$store.state.Token.isLogin">
       <ul class="handle-list">
         <li>
           <el-popover
@@ -72,7 +72,7 @@
   </span>
 </el-dialog>
 <el-dialog
-  title="注册"
+  title="登录"
   :visible.sync="loginVisible"
   width="30%">
   <div class="register-form">
@@ -100,7 +100,6 @@ export default {
     return {
       dialogVisible: false,
       loginVisible: false,
-      isLogin: false,
       isroot: false,
       visible2: false,
       array: [
@@ -144,12 +143,6 @@ export default {
     };
   },
   created(){
-    console.log(this.$store.state)
-    if(this.$store.state.Token.token){
-      this.isLogin = true;
-    }else{
-      this.isLogin = false;
-    }
   },
   methods: {
     handleAvatarSuccess(res, file) {
@@ -189,7 +182,7 @@ export default {
             this.isroot = true;
           }else{
             this.loginVisible = false;
-            this.isLogin = true;
+            this.$store.state.Token.isLogin = true;
           }
         }else{
           this.$refs['loginForm'].resetFields();
@@ -200,7 +193,7 @@ export default {
     loginOut(){
       this.$store.dispatch('UserLogout');
       if (!this.$store.state.Token.token) {
-        this.isLogin = false;
+        this.$store.state.Token.isLogin = false;
         this.$message({
         type: 'success',
         message: '注销成功'

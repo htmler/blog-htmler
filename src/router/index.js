@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index';
 import Home from '../views/auth/home'
 import Detail from '../views/auth/detail'
 import Console from '../views/auth/console'
@@ -25,8 +26,7 @@ import Resourceconsole from '@/components/console/resource/console-resource'
 import Edit from '@/components/console/edit/console-edit'
 import Add from '@/components/console/add/console-add'
 Vue.use(Router)
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -76,64 +76,67 @@ export default new Router({
       path: '/console',
       name: 'console',
       component: Console,
-      children:[
+      meta: {
+        requiresAuth: true
+      },
+      children: [
         {
-          path:'banner',
+          path: 'banner',
           name: 'banner',
           component: Consolebanner
         },
         {
-          path:'mine',
+          path: 'mine',
           name: 'mine',
           component: Consolemine
         },
         {
-          path:'js',
+          path: 'js',
           name: 'js',
           component: Techniquejs
         },
         {
-          path:'hc',
+          path: 'hc',
           name: 'hc',
           component: Techniquehc
         },
         {
-          path:'frame',
+          path: 'frame',
           name: 'frame',
           component: Techniqueframe
         },
         {
-          path:'node',
+          path: 'node',
           name: 'node',
           component: Techniquenode
         },
         {
-          path:'other',
+          path: 'other',
           name: 'other',
           component: Techniqueother
         },
         {
-          path:'continent',
+          path: 'continent',
           name: 'continent',
           component: Continentconsole
         },
         {
-          path:'music',
+          path: 'music',
           name: 'music',
           component: Amusementmusic
         },
         {
-          path:'video',
+          path: 'video',
           name: 'video',
           component: Amusementvideo
         },
         {
-          path:'resource',
+          path: 'resource',
           name: 'resource',
           component: Resourceconsole
         },
         {
-          path:'discovery',
+          path: 'discovery',
           name: 'discovery',
           component: Discoveryconsole
         },
@@ -156,3 +159,21 @@ export default new Router({
     }
   ]
 })
+//注册全局钩子用来拦截导航
+router.beforeEach((to, from, next) => {
+  //获取store里面的token
+  let token = store.state.Token.token;
+  //判断要去的路由有没有requiresAuth
+  if (to.meta.requiresAuth) {
+    if (token) {
+      next();
+    } else {
+      next({
+        path: '/home',
+      });
+    }
+  } else {
+    next();
+  }
+});
+export default router;
