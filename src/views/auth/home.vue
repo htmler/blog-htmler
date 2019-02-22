@@ -3,7 +3,7 @@
   <div class="header">
     <div class="header-container">
       <div class="header-left">
-      <div class="left-img">陈前</div>
+      <div class="left-img">CQshare</div>
     </div>
     <div class="header-right">
       <ul class="right-list">
@@ -22,18 +22,19 @@
           <el-popover
             placement="top"
             width="160"
+            trigger="hover"
             v-model="visible2">
             <p>是否注销</p>
             <div style="text-align: right; margin: 0">
               <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
               <el-button type="primary" size="mini" @click="loginOut">确定</el-button>
             </div>
-            <el-button slot="reference">欢迎{{$store.state.Token.username}}</el-button>
+            <el-button slot="reference"><router-link to = "/console" target = "_blank">欢迎{{$store.state.Token.username}}</router-link></el-button>
           </el-popover>
         </li>
       </ul>
     </div>
-    <div v-if="isroot" class="header-console"><router-link to = "/console" target = "_blank">后台管理</router-link></div>
+    <!-- <div v-if="isroot" class="header-console"><router-link to = "/console" target = "_blank">后台管理</router-link></div> -->
     </div>
   </div>
 <router-view/>
@@ -142,8 +143,7 @@ export default {
       }
     };
   },
-  created(){
-  },
+  created() {},
   methods: {
     handleAvatarSuccess(res, file) {
       this.ruleForm.avatar = res.imgUrl;
@@ -162,47 +162,43 @@ export default {
     },
     register() {
       this.$server.register(this.ruleForm).then(obj => {
-        if(obj.status){
-           this.dialogVisible = false;
-        }else{
+        if (obj.status) {
+          this.dialogVisible = false;
+        } else {
           this.$message.error(obj.errMessage);
-          this.$refs['ruleForm'].resetFields();
+          this.$refs["ruleForm"].resetFields();
         }
       });
     },
     login() {
       this.$server.login(this.loginForm).then(obj => {
-        if(obj.status){
+        if (obj.status) {
           //拿到返回的token和username，并存到store
           let token = obj.token;
           let username = obj._doc.username;
-          this.$store.dispatch('UserLogin', token);
-          this.$store.dispatch('UserName', username);
-          if(obj.isSystem){
-            this.isroot = true;
-          }else{
-            this.loginVisible = false;
-            this.$store.state.Token.isLogin = true;
-          }
-        }else{
-          this.$refs['loginForm'].resetFields();
+          this.$store.dispatch("UserLogin", token);
+          this.$store.dispatch("UserName", username);
+          this.loginVisible = false;
+          this.$store.state.Token.isLogin = true;
+        } else {
+          this.$refs["loginForm"].resetFields();
           this.$message.error(obj.errMessage);
         }
       });
     },
-    loginOut(){
-      this.$store.dispatch('UserLogout');
+    loginOut() {
+      this.$store.dispatch("UserLogout");
       if (!this.$store.state.Token.token) {
         this.$store.state.Token.isLogin = false;
         this.$message({
-        type: 'success',
-        message: '注销成功'
-        })
+          type: "success",
+          message: "注销成功"
+        });
       } else {
         this.$message({
-        type: 'info',
-        message: '注销失败'
-        })
+          type: "info",
+          message: "注销失败"
+        });
       }
     }
   }
@@ -273,7 +269,7 @@ export default {
           }
         }
       }
-       .header-info {
+      .header-info {
         position: absolute;
         top: 50%;
         right: 0;

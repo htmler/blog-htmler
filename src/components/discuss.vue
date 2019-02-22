@@ -75,16 +75,19 @@ export default {
           username: this.$store.state.Token.username
         };
         this.$server.getUserInfo(params).then(obj => {
+          let date = new Date();
+          let strDate = date.toLocaleString().replace(/[年月]/g, '-').replace(/[日上下午]/g, '');
           this.discussForm = {
             ...this.discussForm,
             username: obj.username,
             avatar: obj.avatar,
-            createTime: "2018-03-05"
+            createTime: strDate
           };
           this.$server.addDiscuss(this.discussForm).then(obj => {
             this.isModal = false;
             this.$server.getDiscussList().then(obj => {
               this.techniqueList = obj;
+              this.techniqueList.reverse();
             });
             this.$message({
               type: "success",
@@ -103,6 +106,7 @@ export default {
   created() {
     this.$server.getDiscussList().then(obj => {
       this.techniqueList = obj;
+      this.techniqueList.reverse();
     });
   }
 };

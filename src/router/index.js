@@ -38,37 +38,58 @@ const router = new Router({
         {
           path: 'home',
           name: 'homepage',
-          component: HomePage
+          component: HomePage,
+          meta:{
+            title:'首页'
+          }
         },
         {
           path: 'technique',
           name: 'technique',
-          component: Technique
+          component: Technique,
+          meta:{
+            title:'技术帖'
+          }
         },
         {
           path: 'continent',
           name: 'continent',
-          component: Continent
+          component: Continent,
+          meta:{
+            title:'小酒馆'
+          }
         },
         {
           path: 'amusement',
           name: 'amusement',
-          component: Amusement
+          component: Amusement,
+          meta:{
+            title:'音乐电影'
+          }
         },
         {
           path: 'resourse',
           name: 'resourse',
-          component: Resourse
+          component: Resourse,
+          meta:{
+            title:'资源中心'
+          }
         },
         {
           path: 'discovery',
           name: 'discovery',
-          component: Find
+          component: Find,
+          meta:{
+            title:'发型'
+          }
         },
         {
           path: 'discuss',
           name: 'discuss',
-          component: Discuss
+          component: Discuss,
+          meta:{
+            title:'讨论'
+          }
         }
       ]
     },
@@ -83,79 +104,124 @@ const router = new Router({
         {
           path: 'banner',
           name: 'banner',
-          component: Consolebanner
+          component: Consolebanner,
+          meta:{
+            title:'轮播'
+          }
         },
         {
           path: 'mine',
           name: 'mine',
-          component: Consolemine
+          component: Consolemine,
+          meta:{
+            title:'我的信息'
+          }
         },
         {
           path: 'js',
           name: 'js',
-          component: Techniquejs
+          component: Techniquejs,
+          meta:{
+            title:'js列表'
+          }
         },
         {
           path: 'hc',
           name: 'hc',
-          component: Techniquehc
+          component: Techniquehc,
+          meta:{
+            title:'html+css'
+          }
         },
         {
           path: 'frame',
           name: 'frame',
-          component: Techniqueframe
+          component: Techniqueframe,
+          meta:{
+            title:'前端框架'
+          }
         },
         {
           path: 'node',
           name: 'node',
-          component: Techniquenode
+          component: Techniquenode,
+          meta:{
+            title:'nodeJS'
+          }
         },
         {
           path: 'other',
           name: 'other',
-          component: Techniqueother
+          component: Techniqueother,
+          meta:{
+            title:'其他'
+          }
         },
         {
           path: 'continent',
           name: 'continent',
-          component: Continentconsole
+          component: Continentconsole,
+          meta:{
+            title:'小酒馆'
+          }
         },
         {
           path: 'music',
           name: 'music',
-          component: Amusementmusic
+          component: Amusementmusic,
+          meta:{
+            title:'音乐'
+          }
         },
         {
           path: 'video',
           name: 'video',
-          component: Amusementvideo
+          component: Amusementvideo,
+          meta:{
+            title:'电影'
+          }
         },
         {
           path: 'resource',
           name: 'resource',
-          component: Resourceconsole
+          component: Resourceconsole,
+          meta:{
+            title:'资源中心'
+          }
         },
         {
           path: 'discovery',
           name: 'discovery',
-          component: Discoveryconsole
+          component: Discoveryconsole,
+          meta:{
+            title:'发现'
+          }
         },
         {
           path: 'edit/:id',
           name: 'edit',
-          component: Edit
+          component: Edit,
+          meta:{
+            title:'编辑作品'
+          }
         },
         {
           path: 'add/:type',
           name: 'add',
-          component: Add
+          component: Add,
+          meta:{
+            title:'新增作品'
+          }
         }
       ]
     },
     {
       path: '/detail/:id',
       name: 'detail',
-      component: Detail
+      component: Detail,
+      meta:{
+        title:'详情页'
+      }
     }
   ]
 })
