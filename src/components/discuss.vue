@@ -74,27 +74,38 @@ export default {
         let params = {
           username: this.$store.state.Token.username
         };
-        this.$server.getUserInfo(params).then(obj => {
-          let date = new Date();
-          let strDate = date.toLocaleString().replace(/[年月]/g, '-').replace(/[日上下午]/g, '');
-          this.discussForm = {
-            ...this.discussForm,
-            username: obj.username,
-            avatar: obj.avatar,
-            createTime: strDate
-          };
-          this.$server.addDiscuss(this.discussForm).then(obj => {
-            this.isModal = false;
-            this.$server.getDiscussList().then(obj => {
-              this.techniqueList = obj;
-              this.techniqueList.reverse();
+        this.$server.getUserInfo(params).then(
+          obj => {
+            let date = new Date();
+            let strDate = date
+              .toLocaleString()
+              .replace(/[年月]/g, "-")
+              .replace(/[日上下午]/g, "");
+            this.discussForm = {
+              ...this.discussForm,
+              username: obj.username,
+              avatar: obj.avatar,
+              createTime: strDate
+            };
+            this.$server.addDiscuss(this.discussForm).then(obj => {
+              this.isModal = false;
+              this.$server.getDiscussList().then(obj => {
+                this.techniqueList = obj;
+                this.techniqueList.reverse();
+              });
+              this.$message({
+                type: "success",
+                message: "评论成功"
+              });
             });
+          },
+          err => {
             this.$message({
-              type: "success",
-              message: "评论成功"
+              type: "err",
+              message: "登录失效，请重新登录"
             });
-          });
-        });
+          }
+        );
       } else {
         this.$message({
           type: "error",

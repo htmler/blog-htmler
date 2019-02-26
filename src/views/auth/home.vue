@@ -39,8 +39,10 @@
   </div>
 <router-view/>
 <div class="footer">
-  <div class="footer-nav"></div>
-  <div class="font-info"></div>
+  <div class="footer-nav">
+    <div class="nav-a"><router-link to = "/home">CQshare</router-link></div>
+  </div>
+  <!-- <div class="font-info"></div> -->
 </div>
 <el-dialog
   title="注册"
@@ -309,13 +311,21 @@ export default {
   .footer {
     position: relative;
     width: 100%;
-    height: 200px;
+    // height: 200px;
     bottom: 0;
     background-color: #292929;
     .footer-nav {
       height: 60px;
       background-color: #343539;
       color: #999;
+      .nav-a{
+        height: 100%;
+        width: 1200px;
+        margin: 0 auto;
+        line-height: 60px;
+        font-size: 36px;
+        color: #fff;
+      }
     }
   }
   .show-form {

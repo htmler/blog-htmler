@@ -1,12 +1,16 @@
 <template>
     <div class="summary-banner">
             <div class="banner-left">
+              <router-link :to = "{name:'detail',params:{id:bannerList[count]._id}}">
               <img class="main-img" :src="bannerList[count].imageUrl" alt="">
+              </router-link>
             </div>
             <div class="right-nav">
                 <ul class="nav-list">
                     <li class="list-img" v-for="(item,index) in bannerList" @mouseover="showBanner(item,index)" @mouseout="startGrow">  
-                      <img class="nav-img" v-if="item" :src="bannerList[index].imageUrl" alt="">
+                          <router-link :to = "{name:'detail',params:{id:bannerList[index]._id}}">
+                              <img class="nav-img" v-if="item" :src="bannerList[index].imageUrl" alt="">
+                          </router-link>
                     </li>
                 </ul>
                 </div> 
@@ -19,12 +23,12 @@ export default {
   data() {
     return {
       timer: null,
-      count: 0,
+      count: 0
     };
   },
   props: {
     bannerList: {
-      type: Array,
+      type: Array
     }
   },
   methods: {
