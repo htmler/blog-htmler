@@ -43,4 +43,17 @@ a {
 }
 textarea {
 }
+/*
+    markdown style  <cn_brian@163.com>
+*/
+pre {
+  padding: 1rem 1rem;
+  background: #F3F3F3;
+  overflow: auto;
+  line-height: 1.45;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-align: left;
+}
+
 </style>

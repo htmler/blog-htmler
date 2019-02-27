@@ -4,9 +4,9 @@
             <ul class="logo-list">
                 <li v-for="item in dataShow.type">{{item}}</li>
             </ul>
-            <div class="logo-author">
+            <!-- <div class="logo-author">
                 <img src="../assets/d_avatar.png" alt="">
-            </div>
+            </div> -->
         </div>
         <div class="container-content">
             <video v-if="dataShow.mvSrc" :src="dataShow.mvSrc" controls></video>
@@ -14,10 +14,10 @@
         </div>
         <div class="container-end">
             <div class="end-name">THE END</div>
-            <div class="end-info">
+            <!-- <div class="end-info">
                 版权声明：本文来自 <span class="info-from"> 豆瓣 </span> , 相关版权归原作者及来源网站所有。
             </div>
-            <div class="end-link">查看全文</div>
+            <div class="end-link">查看全文</div> -->
         </div>
     </div>
 </template>

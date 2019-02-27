@@ -1,30 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/index';
-import Home from '../views/auth/home'
-import Detail from '../views/auth/detail'
-import Console from '../views/auth/console'
-import HomePage from '@/components/homepage'
-import Technique from '@/components/technique'
-import Continent from '@/components/continent'
-import Amusement from '@/components/amusement'
-import Resourse from '@/components/resourse'
-import Find from '@/components/find'
-import Discuss from '@/components/discuss'
-import Consolebanner from '@/components/console/banner'
-import Consolemine from '@/components/console/mine-info'
-import Techniquehc from '@/components/console/technique/console-hc'
-import Techniquejs from '@/components/console/technique/console-js'
-import Techniqueframe from '@/components/console/technique/console-frame'
-import Techniquenode from '@/components/console/technique/console-node'
-import Techniqueother from '@/components/console/technique/console-other'
-import Amusementmusic from '@/components/console/amusement/console-music'
-import Amusementvideo from '@/components/console/amusement/console-video'
-import Continentconsole from '@/components/console/continent/console-continent'
-import Discoveryconsole from '@/components/console/discovery/console-discovery'
-import Resourceconsole from '@/components/console/resource/console-resource'
-import Edit from '@/components/console/edit/console-edit'
-import Add from '@/components/console/add/console-add'
 Vue.use(Router)
 const router = new Router({
   mode: 'history',
@@ -32,13 +8,13 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: (resolve) => require(['../views/auth/home'],resolve),
       redirect: '/home',
       children: [
         {
           path: 'home',
           name: 'homepage',
-          component: HomePage,
+          component: (resolve) => require(['@/components/homepage'],resolve),
           meta:{
             title:'首页'
           }
@@ -46,7 +22,7 @@ const router = new Router({
         {
           path: 'technique',
           name: 'technique',
-          component: Technique,
+          component: (resolve) => require(['@/components/technique'],resolve),
           meta:{
             title:'技术帖'
           }
@@ -54,7 +30,7 @@ const router = new Router({
         {
           path: 'continent',
           name: 'continent',
-          component: Continent,
+          component: (resolve) => require(['@/components/continent'],resolve),
           meta:{
             title:'小酒馆'
           }
@@ -62,7 +38,7 @@ const router = new Router({
         {
           path: 'amusement',
           name: 'amusement',
-          component: Amusement,
+          component: (resolve) => require(['@/components/amusement'],resolve),
           meta:{
             title:'音乐电影'
           }
@@ -70,7 +46,7 @@ const router = new Router({
         {
           path: 'resourse',
           name: 'resourse',
-          component: Resourse,
+          component: (resolve) => require(['@/components/resourse'],resolve),
           meta:{
             title:'资源中心'
           }
@@ -78,7 +54,7 @@ const router = new Router({
         {
           path: 'discovery',
           name: 'discovery',
-          component: Find,
+          component: (resolve) => require(['@/components/find'],resolve),
           meta:{
             title:'发型'
           }
@@ -86,7 +62,7 @@ const router = new Router({
         {
           path: 'discuss',
           name: 'discuss',
-          component: Discuss,
+          component: (resolve) => require(['@/components/discuss'],resolve),
           meta:{
             title:'讨论'
           }
@@ -96,7 +72,7 @@ const router = new Router({
     {
       path: '/console',
       name: 'console',
-      component: Console,
+      component: (resolve) => require(['../views/auth/console'],resolve),
       meta: {
         requiresAuth: true
       },
@@ -104,7 +80,7 @@ const router = new Router({
         {
           path: 'banner',
           name: 'banner',
-          component: Consolebanner,
+          component: (resolve) => require(['@/components/console/banner'],resolve),
           meta:{
             title:'轮播'
           }
@@ -112,7 +88,7 @@ const router = new Router({
         {
           path: 'mine',
           name: 'mine',
-          component: Consolemine,
+          component: (resolve) => require(['@/components/console/mine-info'],resolve),
           meta:{
             title:'我的信息'
           }
@@ -120,7 +96,7 @@ const router = new Router({
         {
           path: 'js',
           name: 'js',
-          component: Techniquejs,
+          component: (resolve) => require(['@/components/console/technique/console-js'],resolve),
           meta:{
             title:'js列表'
           }
@@ -128,7 +104,7 @@ const router = new Router({
         {
           path: 'hc',
           name: 'hc',
-          component: Techniquehc,
+          component: (resolve) => require(['@/components/console/technique/console-hc'],resolve),
           meta:{
             title:'html+css'
           }
@@ -136,7 +112,7 @@ const router = new Router({
         {
           path: 'frame',
           name: 'frame',
-          component: Techniqueframe,
+          component: (resolve) => require(['@/components/console/technique/console-frame'],resolve),
           meta:{
             title:'前端框架'
           }
@@ -144,7 +120,7 @@ const router = new Router({
         {
           path: 'node',
           name: 'node',
-          component: Techniquenode,
+          component: (resolve) => require(['@/components/console/technique/console-node'],resolve),
           meta:{
             title:'nodeJS'
           }
@@ -152,7 +128,7 @@ const router = new Router({
         {
           path: 'other',
           name: 'other',
-          component: Techniqueother,
+          component: (resolve) => require(['@/components/console/technique/console-other'],resolve),
           meta:{
             title:'其他'
           }
@@ -160,7 +136,7 @@ const router = new Router({
         {
           path: 'continent',
           name: 'continent',
-          component: Continentconsole,
+          component: (resolve) => require(['@/components/console/continent/console-continent'],resolve),
           meta:{
             title:'小酒馆'
           }
@@ -168,7 +144,7 @@ const router = new Router({
         {
           path: 'music',
           name: 'music',
-          component: Amusementmusic,
+          component: (resolve) => require(['@/components/console/amusement/console-music'],resolve),
           meta:{
             title:'音乐'
           }
@@ -176,7 +152,7 @@ const router = new Router({
         {
           path: 'video',
           name: 'video',
-          component: Amusementvideo,
+          component: (resolve) => require(['@/components/console/amusement/console-video'],resolve),
           meta:{
             title:'电影'
           }
@@ -184,7 +160,7 @@ const router = new Router({
         {
           path: 'resource',
           name: 'resource',
-          component: Resourceconsole,
+          component: (resolve) => require(['@/components/console/resource/console-resource'],resolve),
           meta:{
             title:'资源中心'
           }
@@ -192,7 +168,7 @@ const router = new Router({
         {
           path: 'discovery',
           name: 'discovery',
-          component: Discoveryconsole,
+          component: (resolve) => require(['@/components/console/discovery/console-discovery'],resolve),
           meta:{
             title:'发现'
           }
@@ -200,7 +176,7 @@ const router = new Router({
         {
           path: 'edit/:id',
           name: 'edit',
-          component: Edit,
+          component: (resolve) => require(['@/components/console/edit/console-edit'],resolve),
           meta:{
             title:'编辑作品'
           }
@@ -208,7 +184,7 @@ const router = new Router({
         {
           path: 'add/:type',
           name: 'add',
-          component: Add,
+          component: (resolve) => require(['@/components/console/add/console-add'],resolve),
           meta:{
             title:'新增作品'
           }
@@ -218,7 +194,7 @@ const router = new Router({
     {
       path: '/detail/:id',
       name: 'detail',
-      component: Detail,
+      component: (resolve) => require(['../views/auth/detail'],resolve),
       meta:{
         title:'详情页'
       }

@@ -3,7 +3,7 @@
        <div class="container-header">
            <div class="header-container">
                 <div class="header-left">
-                <div class="left-img">陈前</div>
+                <div class="left-img">CQshare</div>
             </div>
             <div class="header-right">
                 <ul class="right-list">
@@ -43,7 +43,7 @@ export default {
   components: { Detailcontent, Detailhot },
   data() {
     return {
-      array: [{ name: "首页", id: 1, link: "/home" }],
+      array: [{ name: "返回首页", id: 1, link: "/home" }],
       dataObj:Object,
     };
   },
@@ -111,7 +111,7 @@ export default {
   .container-img {
     margin-top: 80px;
     height: 350px;
-    background: url(../../assets/bg-column.jpg) no-repeat;
+    // background: url(../../assets/bg-column.jpg) no-repeat;
     background-size: 100% 100%;
     position: relative;
     .img-cover {
