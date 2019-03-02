@@ -71,7 +71,6 @@ export default {
       this.isModal = false;
     },
     submit() {
-      this.loading = true;
       if (this.$store.state.Token.token) {
         let params = {
           username: this.$store.state.Token.username
@@ -89,8 +88,6 @@ export default {
               avatar: obj.avatar,
               createTime: strDate
             };
-            setTimeout(() => {
-              this.loading = false;
               this.$server.addDiscuss(this.discussForm).then(obj => {
                 this.isModal = false;
                 this.$server.getDiscussList().then(obj => {
@@ -102,7 +99,6 @@ export default {
                   message: "评论成功"
                 });
               });
-            }, 1000);
           },
           err => {
             this.$message({

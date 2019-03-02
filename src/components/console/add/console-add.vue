@@ -142,7 +142,31 @@ export default {
         return isJPG && isLt2M;
     },
     changeMavon() {},
-    $imgAdd() {},
+    $imgAdd() {
+      // 第一步.将图片上传到服务器.
+      var formdata = new FormData();
+      formdata.append("image", $file);
+      let res;
+      this.img_file[pos] = $file;
+      const promise = () => {
+        const a = new Promise(resolve => {
+        var xhr = new XMLHttpRequest();
+        let res;
+        xhr.open("POST", "http://39.97.161.87:3000/api/fileUpload", true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+            res = JSON.parse(xhr.responseText);
+            resolve(res);
+          }
+        };
+        xhr.send(formdata);
+      });
+      return a;
+      };
+      promise().then((item) => {
+        this.$refs.md.$img2Url(pos, item.imgUrl);
+      });
+    },
     submitForm(formName) {
       // this.ruleForm.date1 = new Date(this.ruleForm.date1)
       this.$refs[formName].validate(valid => {

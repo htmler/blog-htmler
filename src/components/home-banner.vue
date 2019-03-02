@@ -4,6 +4,10 @@
               <router-link :to = "{name:'detail',params:{id:bannerList[count]._id}}">
               <img class="main-img" :src="bannerList[count].imageUrl" alt="">
               </router-link>
+              <div class="banner-info">
+                <div class="info-title">{{bannerList[count].title}}</div>
+                <div class="info-other"><span class="other-author">作者：{{bannerList[count].author}}</span><span>发布时间：{{bannerList[count].date1}}</span></div>
+              </div>
             </div>
             <div class="right-nav">
                 <ul class="nav-list">
@@ -70,7 +74,28 @@ export default {
     width: 80%;
     height: 100%;
     border-radius: 5px;
+    position: relative;
     cursor: pointer;
+    .banner-info{
+      position: absolute;
+      height: 60px;
+      color: #fff;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      left: 0;
+      bottom: 0;
+      box-sizing: border-box;
+      padding : 5px 20px 0 20px;
+      width: 100%;
+      .info-title{
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .info-other{
+        .other-author{
+          margin-right: 20px;
+        }
+      }
+    }
     img {
       width: 100%;
       height: 100%;
