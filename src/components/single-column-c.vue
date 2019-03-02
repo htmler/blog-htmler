@@ -1,8 +1,8 @@
 <template>
-    <div class="single-colunm-c">
-        <div class="column-title">冷幻觉</div>
+    <div class="single-colunm-c" @click="jumpTo">
+        <div class="column-title">{{item.title}}</div>
         <div class="column-content">
-            对于爱旅游的人来说，要是听到有人创办了旅游杂志，可能会以为这人肯定是个...
+            {{item.desc}}...
         </div>
     </div>
 </template>
@@ -12,6 +12,16 @@ export default {
   name: "singlecolumnc",
   data() {
     return {};
+  },
+  props:{
+      item:{
+          type:Object
+      }
+  },
+  methods:{
+      jumpTo(){
+        window.location.href=`/detail/${this.item._id}`;
+      }
   }
 };
 </script>
@@ -22,6 +32,7 @@ export default {
   width: 100%;
   height: 100%;
   font-size: 14px;
+  cursor: pointer;
   .column-title {
       color: #000;
       font-weight: bold;

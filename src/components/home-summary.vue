@@ -1,14 +1,14 @@
 <template>
     <div class="summary-box">
-        <div class="box-title">我的名片</div>
-        <div class="box-info">
-            <div class="info-img">
-                <img src="../assets/d_avatar.png" alt="">
+        <!-- <div class="box-title">我的名片</div> -->
+            <!-- <div class="box-info">
+                <div class="info-img">
+                    <img src="../assets/d_avatar.png" alt="">
+                </div>
             </div>
-        </div>
-        <div class="box-name">
-            <span>陈前</span>
-        </div>
+            <div class="box-name">
+                <span>陈前</span>
+            </div> -->
         <div class="box-list">
             <div class="list-name list-li">网名：换种措辞</div>
             <div class="list-occup list-li">职业：前端开发工程师</div>

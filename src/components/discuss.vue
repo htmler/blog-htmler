@@ -30,7 +30,7 @@
             <textarea v-model="discussForm.content"></textarea>
           </div>
           <div class="content-btn" @click="submit">
-            <div class="btn-submit">提交</div>
+            <div class="btn-submit"><i v-if="loading" class="el-icon-loading"></i>提交</div>
           </div>
         </div>
       </div>
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       isModal: false,
+      loading: false,
       discussForm: {
         username: "",
         avatar: "",
@@ -70,6 +71,7 @@ export default {
       this.isModal = false;
     },
     submit() {
+      this.loading = true;
       if (this.$store.state.Token.token) {
         let params = {
           username: this.$store.state.Token.username
@@ -87,17 +89,20 @@ export default {
               avatar: obj.avatar,
               createTime: strDate
             };
-            this.$server.addDiscuss(this.discussForm).then(obj => {
-              this.isModal = false;
-              this.$server.getDiscussList().then(obj => {
-                this.techniqueList = obj;
-                this.techniqueList.reverse();
+            setTimeout(() => {
+              this.loading = false;
+              this.$server.addDiscuss(this.discussForm).then(obj => {
+                this.isModal = false;
+                this.$server.getDiscussList().then(obj => {
+                  this.techniqueList = obj;
+                  this.techniqueList.reverse();
+                });
+                this.$message({
+                  type: "success",
+                  message: "评论成功"
+                });
               });
-              this.$message({
-                type: "success",
-                message: "评论成功"
-              });
-            });
+            }, 1000);
           },
           err => {
             this.$message({

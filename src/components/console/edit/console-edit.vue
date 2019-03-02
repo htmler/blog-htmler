@@ -11,7 +11,7 @@
                 <el-form-item label="文章背景图" prop="imageUrl">
                     <el-upload
                       class="bg-uploader"
-                      action="http://localhost:3000/api/fileUpload"
+                      action="http://39.97.161.87:3000/api/fileUpload"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload">
@@ -49,10 +49,9 @@
             <el-form-item v-if="isAmusement" label="上传资源" prop="mvSrc">
                     <el-upload
                       class="bg-uploader"
-                      action="http://localhost:3000/api/fileUpload"
+                      action="http://39.97.161.87:3000/api/fileUpload"
                       :show-file-list="false"
-                      :on-success="handleVideoSuccess"
-                      :before-upload="beforeVideoUpload">
+                      :on-success="handleVideoSuccess">
                       <video v-if="ruleForm.mvSrc" :src="ruleForm.mvSrc" class="avatar"></video>
                       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
@@ -74,7 +73,7 @@ export default {
   components: { mavonEditor },
   data() {
     return {
-      isAmusement:false,
+      isAmusement: false,
       img_file: [],
       ruleForm: {
         title: "",
@@ -117,11 +116,8 @@ export default {
     };
   },
   methods: {
-    handleVideoSuccess(res,file) {
+    handleVideoSuccess(res, file) {
       this.ruleForm.mvSrc = res.imgUrl;
-    },
-    handleAvatarSuccess(res, file) {
-        this.ruleForm.imageUrl = res.imgUrl;
     },
     handleAvatarSuccess(res, file) {
       this.ruleForm.imageUrl = res.imgUrl;
@@ -141,15 +137,27 @@ export default {
     changeMavon() {},
     $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
-      console.log($file);
       var formdata = new FormData();
       formdata.append("image", $file);
+      let res;
       this.img_file[pos] = $file;
-      this.$server.uploadFile(formdata).then(res => {
-        console.log(res);
-        let _res = res.data;
-        // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-        this.$refs.md.$img2Url(pos, _res.url);
+      const promise = () => {
+        const a = new Promise(resolve => {
+        var xhr = new XMLHttpRequest();
+        let res;
+        xhr.open("POST", "http://39.97.161.87:3000/api/fileUpload", true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+            res = JSON.parse(xhr.responseText);
+            resolve(res);
+          }
+        };
+        xhr.send(formdata);
+      });
+      return a;
+      };
+      promise().then((item) => {
+        this.$refs.md.$img2Url(pos, item.imgUrl);
       });
     },
     submitForm(formName) {

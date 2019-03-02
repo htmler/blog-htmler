@@ -4,9 +4,9 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="homepage-summary">
-        <div class="summary-left">
+        <!-- <div class="summary-left">
             <homesummary></homesummary>
-        </div>
+        </div> -->
         <div class="summary-right">
             <homebanner v-if="bannerList" :bannerList = "bannerList"></homebanner>
         </div>
@@ -107,7 +107,7 @@ export default {
       background-color: #fff;
     }
     .summary-right {
-      width: 78%;
+      width: 100%;
       border-radius: 5px;
       height: 350px;
       background-color: #fff;

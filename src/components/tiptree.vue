@@ -12,7 +12,7 @@
       </li>
     </ul>
     <div class="body-img">
-      <img src="../assets/banner-2.jpg" alt="">
+      <img src="https://client-cq.oss-cn-beijing.aliyuncs.com/timg.jpg" alt="">
     </div>
   </div>
 </div>

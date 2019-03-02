@@ -29,7 +29,7 @@
               <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
               <el-button type="primary" size="mini" @click="loginOut">确定</el-button>
             </div>
-            <el-button slot="reference"><router-link to = "/console" target = "_blank">欢迎{{$store.state.Token.username}}</router-link></el-button>
+            <el-button slot="reference" @click="jumpTo">欢迎{{$store.state.Token.username}}</el-button>
           </el-popover>
         </li>
       </ul>
@@ -59,11 +59,11 @@
         <el-form-item label="头像" prop="avatar">
             <el-upload
               class="avatar-uploader"
-              action="http://localhost:3000/api/fileUpload"
+              action="http://39.97.161.87:3000/api/fileUpload"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload">
-              <img v-if="ruleForm.avatar" :src="ruleForm.avatar" class="avatar">
+              <img v-if="ruleForm.avatar" :src="ruleForm.avatar" class="avatar" style="width: 80px;height: 80px;border-radius: 50%;">
               <i style="width:100px;height:100px;border:1px solid #efefef;line-height:100px;" v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
         </el-form-item>
@@ -147,6 +147,11 @@ export default {
   },
   created() {},
   methods: {
+    jumpTo(){
+      if(this.$store.state.Token.username === 'system'){
+        this.$router.push({path:`/console/mine`})
+      }
+    },
     handleAvatarSuccess(res, file) {
       this.ruleForm.avatar = res.imgUrl;
     },

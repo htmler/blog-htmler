@@ -11,7 +11,7 @@
                 <el-form-item label="文章背景图" prop="imageUrl">
                     <el-upload
                       class="bg-uploader"
-                      action="http://localhost:3000/api/fileUpload"
+                      action="http://39.97.161.87:3000/api/fileUpload"
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       :before-upload="beforeAvatarUpload">
@@ -50,10 +50,9 @@
             <el-form-item v-if="isAmusement" label="上传资源" prop="mvSrc">
                     <el-upload
                       class="bg-uploader"
-                      action="http://localhost:3000/api/fileUpload"
+                      action="http://39.97.161.87:3000/api/fileUpload"
                       :show-file-list="false"
-                      :on-success="handleVideoSuccess"
-                      :before-upload="beforeVideoUpload">
+                      :on-success="handleVideoSuccess">
                       <video v-if="ruleForm.mvSrc" :src="ruleForm.mvSrc" class="avatar"></video>
                       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
@@ -129,9 +128,6 @@ export default {
     },
     handleAvatarSuccess(res, file) {
         this.ruleForm.imageUrl = res.imgUrl;
-    },
-    beforeVideoUpload(file) {
-
     },
     beforeAvatarUpload(file) { 
         const isJPG = file.type === 'image/jpeg';

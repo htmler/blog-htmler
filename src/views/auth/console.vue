@@ -2,15 +2,13 @@
 <el-container style="height: 100vh;">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
     <el-menu>
-      <!-- <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>首页</template>
+      <el-submenu index="1">
+        <template slot="title"><i class="el-icon-message"></i>基本信息</template>
         <el-menu-item-group >
-            <router-link to = "/console/banner">
-          <el-menu-item index="1-1">banner</el-menu-item></router-link>
-          <router-link to = "/console/mine">
-          <el-menu-item index="1-2">我的信息</el-menu-item></router-link>
+            <router-link to = "/console/mine">
+          <el-menu-item index="1-1">服务器</el-menu-item></router-link>
         </el-menu-item-group>
-      </el-submenu> -->
+      </el-submenu>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-message"></i>技术帖</template>
         <el-menu-item-group>

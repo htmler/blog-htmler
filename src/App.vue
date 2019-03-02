@@ -38,8 +38,8 @@ li {
   list-style: none;
 }
 a {
-  color: #999;
-  text-decoration: none;
+  color: #999 !important;
+  text-decoration: none !important;
 }
 textarea {
 }

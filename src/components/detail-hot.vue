@@ -5,7 +5,7 @@
         </div>
         <div class="container-list">
             <div class="list-body" v-for="item of hotList">
-                <singlecolumnc></singlecolumnc>
+                <singlecolumnc :item = "item"></singlecolumnc>
             </div>
         </div>
     </div>
@@ -18,11 +18,14 @@ export default {
   components:{Singlecolumnc},
   data() {
     return {
-        hotList:[
-            {name:'xxx',id:1},
-            {name:'xxxx',id:2}
-        ]
+        hotList:''
     };
+  },
+  created(){
+      this.$server.getHotList().then(obj => {
+          this.hotList = obj;
+          console.log(this.hotList);
+      })
   }
 };
 </script>
