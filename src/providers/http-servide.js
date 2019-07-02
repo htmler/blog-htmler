@@ -3,7 +3,7 @@ import { Upload } from 'element-ui';
 import store from '../store/index';
 
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://39.97.161.87:3000'; //填写域名
+axios.defaults.baseURL = 'http://localhost:3000'; //填写域名
 
 //http request 拦截器
 axios.interceptors.request.use(
