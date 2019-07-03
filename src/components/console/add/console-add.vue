@@ -91,11 +91,11 @@ export default {
       rules: {
         title: [
           { required: true, message: "请输入文章名称", trigger: "blur" },
-          { min: 0, max: 20, message: "长度在20个字符以内", trigger: "blur" }
+          { min: 0, max: 16, message: "长度在16个字符以内", trigger: "blur" }
         ],
         author: [
           { required: true, message: "请输入文章作者", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { min: 0, max: 20, message: "长度在 0 到 20 个字符", trigger: "blur" }
         ],
         date1: [
           {

@@ -99,6 +99,7 @@ export default {
     img {
       width: 100%;
       height: 100%;
+      border-radius: 5px;
     }
   }
   .right-nav {
@@ -120,11 +121,12 @@ export default {
         cursor: pointer;
         transition: all 0.3s;
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.1);
         }
         img {
           width: 100%;
           height: 100%;
+          border-radius: 5px;
         }
       }
     }

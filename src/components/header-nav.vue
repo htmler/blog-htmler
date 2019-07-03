@@ -37,7 +37,8 @@ export default {
 .banner-container {
   width: 100%;
   height: 100%;
-  background-color: #2c2c2c;
+  background-color: #04896C;
+  // background-image:linear-gradient(to right,#ECDA78,#F2B96A);
   position: relative;
   .container-content {
     width: 1200px;
@@ -55,7 +56,7 @@ export default {
     }
     .content-tip {
       font-size: 14px;
-      color: #999;
+      color: #fff;
       padding-top: 10px;
     }
   }

@@ -5,7 +5,7 @@
       <el-button>新增</el-button>
       </router-link>
     </el-header>
-        <el-table :data="tableData">
+        <el-table :data="tableData" border :cell-style="cellStyle" :header-cell-style="rowClass">
         <el-table-column prop="title" label="标题" width="140">
         </el-table-column>
         <el-table-column prop="date1" label="时间" width="120">
@@ -34,6 +34,12 @@ export default {
   methods:{
       showEdit(i){
           this.$router.push({name:'edit',params:{id:this.tableData[i]._id}})
+      },
+      cellStyle(){
+        return 'text-align:center'
+      },
+      rowClass() {
+        return 'text-align:center'
       }
   },
   created(){

@@ -5,14 +5,14 @@
   </div>
   <div class="container-body">
     <ul class="body-list">
-      <li v-for="(item,index) in navList" @click="reload(item,index)" ref="lilist">
+      <li class="list-show" v-for="(item,index) in navList" @click="reload(item,index)" ref="lilist">
         <div class="li-squar">
         </div>
         <div class="li-content">{{item.name}}</div>
       </li>
     </ul>
     <div class="body-img">
-      <img src="https://client-cq.oss-cn-beijing.aliyuncs.com/timg.jpg" alt="">
+      <img src="https://client-cq.oss-cn-beijing.aliyuncs.com/1.jpg" alt="">
     </div>
   </div>
 </div>
@@ -82,7 +82,7 @@ export default {
     .body-list {
       display: flex;
       flex-direction: column;
-      li {
+      .list-show {
         display: flex;
         justify-content: flex-start;
         color: #fff;
@@ -98,16 +98,49 @@ export default {
           width: 0;
           height: 0;
           border: 20px solid;
-          border-color: transparent #000 transparent transparent;
+          border-color: transparent #ECDA78 transparent transparent;
         }
         .li-content {
           flex: 1;
-          background-color: #000;
-          color: #fff;
+          background-color: #ECDA78;
+          color: #333;
+          font-weight: bold;
           height: 40px;
           line-height: 40px;
           box-sizing: border-box;
           padding-left: 20px;
+        }
+      }
+      .list-show:nth-of-type(2){
+        .li-squar {
+          border-color: transparent #CDA198 transparent transparent;
+        }
+        .li-content {
+          background-color: #CDA198;
+        }
+      }
+      .list-show:nth-of-type(3){
+        .li-squar {
+          border-color: transparent #7FE7DC transparent transparent;
+        }
+        .li-content {
+          background-color: #7FE7DC;
+        }
+      }
+      .list-show:nth-of-type(4){
+        .li-squar {
+          border-color: transparent #EEA08C transparent transparent;
+        }
+        .li-content {
+          background-color: #EEA08C;
+        }
+      }
+      .list-show:nth-of-type(5){
+        .li-squar {
+          border-color: transparent #F2B96A transparent transparent;
+        }
+        .li-content {
+          background-color: #F2B96A;
         }
       }
     }

@@ -81,7 +81,7 @@ export default {
   .left-container {
     .container-list {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       flex-wrap: wrap;
       padding: 20px;
       box-sizing: border-box;
@@ -89,13 +89,17 @@ export default {
         height: 100%;
       }
       li {
-        width: 290px;
+        width: 283px;
         height: 200px;
         border-radius: 5px;
+        margin-right: 10px;
         margin-bottom: 10px;
         box-sizing: border-box;
         border: 1px solid #efefef;
         padding: 10px;
+      }
+      li:nth-of-type(3n){
+        margin-right: 0;
       }
     }
   }

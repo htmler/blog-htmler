@@ -38,12 +38,6 @@
     </div>
   </div>
 <router-view/>
-<div class="footer">
-  <div class="footer-nav">
-    <div class="nav-a"><router-link to = "/home">CQshare</router-link></div>
-  </div>
-  <!-- <div class="font-info"></div> -->
-</div>
 <el-dialog
   title="注册"
   :visible.sync="dialogVisible"
@@ -221,8 +215,8 @@ export default {
     width: 100%;
     position: fixed;
     top: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: #fff;
+    color: #0084ff;
     z-index: 99;
     .header-container {
       display: flex;

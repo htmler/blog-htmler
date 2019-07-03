@@ -57,6 +57,7 @@ export default {
     img {
       transition: all 0.5s;
       width: 100%;
+      height: 100%;
       &:hover {
         transform: scale(1.2);
       }
