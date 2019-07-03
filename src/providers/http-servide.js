@@ -205,6 +205,9 @@ export const server = {
   uploadFile(paramObj) {
     return post('/api/fileUpload', paramObj)
   },
+  removeFile(paramObj) {
+    return fetch('/api/fileRemove', paramObj)
+  },
   //用户信息
   getUserInfo(paramObj) {
     return fetch('/api/userInfo', paramObj)

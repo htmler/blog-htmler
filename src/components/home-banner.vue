@@ -43,7 +43,7 @@ export default {
     startGrow(e) {
       this.timer = setInterval(() => {
         this.count++;
-        if (this.count > 2) {
+        if (this.count >= this.bannerList.length) {
           this.count = 0;
         }
       }, 3000);
@@ -52,7 +52,7 @@ export default {
   created() {
     this.timer = setInterval(() => {
       this.count++;
-      if (this.count > 2) {
+      if (this.count >= this.bannerList.length) {
         this.count = 0;
       }
     }, 3000);

@@ -17,6 +17,16 @@
         <el-table-column prop="handle" label="操作">
             <template slot-scope="scope">
                      <el-button @click="showEdit(scope.$index)" type="text" size="small">编辑</el-button>
+                     <el-popover
+                        placement="top"
+                        width="160"
+                        v-model="visible">
+                        <p>确定删除该条数据吗？</p>
+                        <div style="text-align: right; margin: 0">
+                            <el-button @click="remove(scope.$index)" type="text" size="small">删除</el-button>
+                        </div>
+                        <el-button slot="reference" type="text" size="small">删除</el-button>
+                      </el-popover>
             </template>
         </el-table-column>
       </el-table>
@@ -28,25 +38,39 @@ export default {
   name: "console-frame",
   data() {
     return {
-      tableData: []
+      tableData: [],
+      visible : false
     };
   },
-  methods:{
-      showEdit(i){
-          this.$router.push({name:'edit',params:{id:this.tableData[i]._id}})
-      },
-      cellStyle(){
-        return 'text-align:center'
-      },
-      rowClass() {
-        return 'text-align:center'
-      }
-  },
-  created(){
-      this.ruleForm = {
-      ...this.ruleForm,
-      tag:'frame'
+  methods: {
+    showEdit(i) {
+      this.$router.push({
+        name: "edit",
+        params: { id: this.tableData[i]._id }
+      });
+    },
+    cellStyle() {
+      return "text-align:center";
+    },
+    rowClass() {
+      return "text-align:center";
+    },
+    remove(i) {
+      let params = {
+        id: this.tableData[i]._id
+      };
+      this.$server.removeFile(params).then(obj => {
+        this.$server.getFileList(this.ruleForm).then(obj => {
+          this.tableData = obj;
+        });
+      });
     }
+  },
+  created() {
+    this.ruleForm = {
+      ...this.ruleForm,
+      tag: "frame"
+    };
     this.$server.getFileList(this.ruleForm).then(obj => {
       this.tableData = obj;
     });

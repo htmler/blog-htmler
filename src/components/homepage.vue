@@ -8,7 +8,7 @@
             <homesummary></homesummary>
         </div> -->
         <div class="summary-right">
-            <homebanner v-if="bannerList" :bannerList = "bannerList"></homebanner>
+            <homebanner v-if="bannerList.length>0" :bannerList = "bannerList"></homebanner>
         </div>
     </div>
     <div class="homepage-study">

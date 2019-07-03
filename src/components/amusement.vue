@@ -4,7 +4,7 @@
         <headernav :title = "headerTitle" :content = "headerContent"></headernav>
     </div>
     <div class="amusement-list">
-        <homebanner v-if="bannerList" :bannerList = "bannerList"></homebanner>
+        <homebanner v-if="bannerList.length > 0" :bannerList = "bannerList"></homebanner>
     </div>
     <div class="amusement-body" v-if="techniqueList.length >0">
       <div class="body-project" v-for="item in techniqueList">
@@ -66,7 +66,7 @@ export default {
 .spk-amusement {
   width: 100%;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: #eaeaea;
   padding-bottom: 20px;
   .amusement-banner {
     width: 100%;
@@ -76,13 +76,23 @@ export default {
   .amusement-list {
     width: 1200px;
     margin: 20px auto 0;
-    height: 300px;
+    height: 350px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #efefef;
+    box-sizing: border-box;
+    padding: 20px;
   }
   .amusement-body {
     width: 1200px;
     margin: 20px auto 0;
     display: flex;
     flex-wrap: wrap;
+    background-color: #fff;
+    border: 1px solid #efefef;
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 5px;
     justify-content: flex-start;
     .body-project {
       width: 350px;
