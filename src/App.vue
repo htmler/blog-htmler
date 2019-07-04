@@ -48,7 +48,7 @@ textarea {
 */
 pre {
   padding: 0.3rem;
-  background: #F3F3F3;
+  background: #ccc;
   overflow: auto;
   line-height: 1.45;
   box-sizing: border-box;

@@ -72,7 +72,7 @@ export default {
     height: 80px;
     top: 0;
     left: 0;
-    background-color: #333;
+    background-color: #fff;
     z-index: 999;
     .header-container {
       display: flex;
@@ -82,7 +82,7 @@ export default {
       box-sizing: border-box;
       width: 1200px;
       margin: 0 auto;
-      color: #fff;
+      color: #0084ff;
       .header-left {
         font-size: 32px;
       }
@@ -110,7 +110,7 @@ export default {
   }
   .container-img {
     margin-top: 80px;
-    height: 350px;
+    height: 500px;
     // background: url(../../assets/bg-column.jpg) no-repeat;
     background-size: 100% 100%;
     position: relative;

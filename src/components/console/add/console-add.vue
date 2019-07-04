@@ -75,6 +75,7 @@ export default {
   data() {
     return {
       isAmusement:false,
+      img_file: [],
       ruleForm: {
         title: "",
         author:"",
@@ -86,7 +87,8 @@ export default {
         imageUrl:'',
         mvSrc:'',
         tag:this.$route.params.type,
-        view:0
+        view:0,
+        contentId:(new Date()).getTime()
       },
       rules: {
         title: [
@@ -142,7 +144,7 @@ export default {
         return isJPG && isLt2M;
     },
     changeMavon() {},
-    $imgAdd() {
+    $imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
       var formdata = new FormData();
       formdata.append("image", $file);

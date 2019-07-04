@@ -93,7 +93,7 @@ export default {
         ],
         author: [
           { required: true, message: "请输入文章作者", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { min: 0, max: 20, message: "长度在 0 到 20 个字符", trigger: "blur" }
         ],
         date1: [
           {

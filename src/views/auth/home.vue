@@ -141,9 +141,9 @@ export default {
   },
   created() {},
   methods: {
-    jumpTo(){
-      if(this.$store.state.Token.username === 'system'){
-        this.$router.push({path:`/console/mine`})
+    jumpTo() {
+      if (this.$store.state.Token.username === "system") {
+        this.$router.push({ path: `/console/mine` });
       }
     },
     handleAvatarSuccess(res, file) {
@@ -244,8 +244,11 @@ export default {
             border-radius: 5px;
             padding: 0 20px;
             cursor: pointer;
-            &:hover {
-              color: #fff;
+            a:hover {
+              color: #0084ff !important;
+            }
+            .router-link-active {
+              color: #0084ff !important;
             }
           }
         }
@@ -265,7 +268,7 @@ export default {
             cursor: pointer;
             width: 50px;
             &:hover {
-              color: #fff;
+              color: #0084ff;
             }
           }
         }
@@ -317,7 +320,7 @@ export default {
       height: 60px;
       background-color: #343539;
       color: #999;
-      .nav-a{
+      .nav-a {
         height: 100%;
         width: 1200px;
         margin: 0 auto;
